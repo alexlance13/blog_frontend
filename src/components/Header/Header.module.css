@@ -1,0 +1,27 @@
+.main {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: no-repeat center center;
+  background-image: url("../../img/home-bg.jpg");
+  background-size: cover;
+  margin-bottom: 50px;
+  height: 450px;
+  color: white;
+}
+.main :nth-child(2) {
+  text-align: center;
+}
+hr.small {
+  max-width: 100px;
+  border-width: 4px;
+  border-color: white;
+}
+.main h1 {
+  font-size: 84px;
+  margin-bottom: 0;
+  margin-top: 80px;
+}
+p {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 20px 0 0 0;
+}

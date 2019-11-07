@@ -1,0 +1,44 @@
+.postedBy {
+  color: #777777;
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 0;
+}
+.postedBy > p {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.postedBy > a {
+  text-decoration: none;
+  color: #333333;
+  font-family: "Lora", "Times New Roman", serif;
+}
+.main {
+  display: grid;
+  grid-template: 1fr / 1fr 70px 70px;
+}
+.main span {
+  justify-self: end;
+}
+.like span {
+  font-weight: 100;
+  padding: 0 2px;
+}
+.like {
+  width: 70px;
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+.like div {
+  padding-top: 4px;
+  cursor: pointer;
+}
+.comment {
+  width: 70px;
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+}

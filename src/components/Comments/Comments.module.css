@@ -1,0 +1,16 @@
+.comment {
+  padding: 15px;
+}
+.comment a {
+  color: #333333;
+  font-family: "Lora", "Times New Roman", serif;
+  font-style: italic;
+}
+.remove {
+  float: right;
+  border: none;
+  outline: none;
+}
+.remove:active {
+  outline: none;
+}

@@ -1,0 +1,13 @@
+.auth {
+  margin: 30px 200px;
+}
+h2 {
+  text-align: center;
+  padding: 50px;
+}
+.buttons {
+  margin: 50px;
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+  grid-gap: 125px;
+}

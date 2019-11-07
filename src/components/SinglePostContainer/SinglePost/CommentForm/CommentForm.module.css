@@ -1,0 +1,12 @@
+.main {
+  display: grid;
+  grid-template: 1fr / 80% 10%;
+  grid-gap: 30px;
+  margin-top: 50px;
+}
+.shadow-textarea textarea.form-control::placeholder {
+  font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+  padding-left: 0.8rem;
+}
