@@ -15,7 +15,13 @@ export default function PostPrev(props) {
             .join(" ") + "..."}
         </p>
       </NavLink>
-      <PostInfo post={props.post} userId={props.userId} token={props.token}></PostInfo>
+      <PostInfo
+        disabled={true}
+        post={props.post}
+        userId={props.userId}
+        token={props.token}
+        likeClickHandler={props.likeClickHandler}
+      ></PostInfo>
     </div>
   ) : null;
 }

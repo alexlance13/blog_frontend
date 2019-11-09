@@ -25,9 +25,10 @@ const SinglePost = props => {
           userId={props.userId}
           commentClickHandler={props.commentClickHandler}
           token={props.token}
+          likeClickHandler={props.likeClickHandler}
         />
-        {props.isCommentsOpened ? (
-          props.isNewCommentPosted ? (
+        {props.isCommentsOpened &&
+          (props.isNewCommentPosted ? (
             <div>Your comment is on check by admin</div>
           ) : (
             <Comments
@@ -36,8 +37,7 @@ const SinglePost = props => {
               userId={props.userId}
               token={props.token}
             />
-          )
-        ) : null}
+          ))}
         <CommentForm submitHandler={props.submitHandler} />
       </div>
     </div>

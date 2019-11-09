@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <Header head="Clean Blog" neck="A Clean Blog Theme by Start Bootstrap"></Header>
-      <Posts></Posts>
+      <Posts />
     </div>
   );
 };

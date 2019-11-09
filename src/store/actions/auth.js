@@ -1,10 +1,10 @@
 import { SET_USER_INFO } from "./types";
-import Axios from "axios";
+import axios from "../../axios";
 
 export function loginUser(login, password) {
   return async dispatch => {
     try {
-      const res = await Axios.post("http://localhost:3333/login", {
+      const res = await axios.post("/login", {
         login,
         password
       });
@@ -18,7 +18,7 @@ export function loginUser(login, password) {
 export function registerUser(login, password) {
   return async dispatch => {
     try {
-      const res = await Axios.post("http://localhost:3333/register", {
+      const res = await axios.post("/register", {
         login,
         password
       });

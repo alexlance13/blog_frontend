@@ -1,81 +1,48 @@
 import React, { Component } from "react";
-import Axios from "axios";
 import { connect } from "react-redux";
 import SinglePost from "./SinglePost";
-
-async function fetchPost(id) {
-  const response = await Axios.get(`http://localhost:3333/posts/${id}`);
-  return response.data;
-}
+import { fetchSinglePost, setComment, removeComment, like } from "../../store/actions/posts";
 
 class SinglePostContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isCommentsOpened: false,
-      isNewCommentPosted: false,
-      post: []
+      isNewCommentPosted: false
     };
   }
 
-  async componentDidMount() {
-    const post = await fetchPost(this.props.match.params.id);
-    this.setState({
-      post: post
-    });
-  }
-
-  async componentDidUpdate() {
-    const post = await fetchPost(this.props.match.params.id);
-    this.setState({
-      post: post
-    });
+  componentDidMount() {
+    this.props.fetchSinglePost(this.props.match.params.id);
   }
 
   submitHandler = async commentData => {
-    try {
-      const headers = {
-        "content-type": "application/json",
-        authorization: `Bearer ${this.props.token}`
-      };
-      const response = await Axios.post(
-        "http://localhost:3333/comment",
-        { text: commentData, postId: this.state.post._id },
-        { headers }
-      );
+    this.props.setComment(this.props.match.params.id, commentData, this.props.token);
+    this.setState({
+      isCommentsOpened: true,
+      isNewCommentPosted: true
+    });
+    setTimeout(() => {
       this.setState({
-        isCommentsOpened: true,
-        isNewCommentPosted: true,
-        post: response.data
+        isNewCommentPosted: false
       });
-      setTimeout(() => {
-        this.setState({
-          isNewCommentPosted: false
-        });
-      }, 2000);
-    } catch (e) {
-      console.error("Sending comment error:", e);
-    }
+    }, 2000);
   };
 
   removeCommentHandler = async id => {
-    try {
-      const headers = {
-        "content-type": "application/json",
-        authorization: `Bearer ${this.props.token}`
-      };
-      await Axios.delete(`http://localhost:3333/comment/${id}`, { headers });
-    } catch (e) {
-      console.error("Remove comment error", e);
-    }
+    this.props.removeComment(id, this.props.token);
   };
 
   commentClickHandler = () => this.setState({ isCommentsOpened: !this.state.isCommentsOpened });
 
+  likeClickHandler = (id, isLiked) => {
+    this.props.like(id, this.props.token, isLiked);
+  };
+
   render() {
     return (
       <SinglePost
-        post={this.state.post}
+        post={this.props.singlePost}
         userId={this.props.userId}
         commentClickHandler={this.commentClickHandler}
         token={this.props.token}
@@ -83,6 +50,7 @@ class SinglePostContainer extends Component {
         isNewCommentPosted={this.state.isNewCommentPosted}
         removeCommentHandler={this.removeCommentHandler}
         submitHandler={this.submitHandler}
+        likeClickHandler={this.likeClickHandler}
       />
     );
   }
@@ -90,9 +58,22 @@ class SinglePostContainer extends Component {
 
 function mapStateToProps(state) {
   return {
+    singlePost: state.posts.singlePost,
     userId: state.auth.userId,
     token: state.auth.token
   };
 }
 
-export default connect(mapStateToProps)(SinglePostContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchSinglePost: id => dispatch(fetchSinglePost(id)),
+    like: (postId, token, isLiked) => dispatch(like(postId, token, isLiked)),
+    removeComment: (id, token) => dispatch(removeComment(id, token)),
+    setComment: (postId, text, token) => dispatch(setComment(postId, text, token))
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SinglePostContainer);

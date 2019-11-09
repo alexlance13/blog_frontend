@@ -8,7 +8,13 @@ const Posts = props => {
   ) : (
     <div>
       {props.posts.map((post, i) => (
-        <PostPrev key={i} post={post} userId={props.userId} token={props.token}></PostPrev>
+        <PostPrev
+          key={i}
+          post={post}
+          userId={props.userId}
+          token={props.token}
+          likeClickHandler={props.likeClickHandler}
+        ></PostPrev>
       ))}
     </div>
   );

@@ -6,6 +6,59 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
 
 const PostInfo = props => {
+  function crutch(string) {
+    switch (string) {
+      case "comment":
+        if (props.disabled) {
+          return (
+            <NavLink className={classes.picLink} to={`/post/${props.post._id}`}>
+              <FaRegComment />
+            </NavLink>
+          );
+        }
+        return (
+          <div onClick={props.commentClickHandler}>
+            <FaRegComment />
+          </div>
+        );
+      case "like":
+        if (props.disabled) {
+          if (props.isLiked) {
+            return (
+              <NavLink className={classes.picLink} to={`/post/${props.post._id}`}>
+                <FaHeart />
+              </NavLink>
+            );
+          }
+          return (
+            <NavLink className={classes.picLink} to={`/post/${props.post._id}`}>
+              <FaRegHeart />
+            </NavLink>
+          );
+        }
+        if (props.isLiked) {
+          return (
+            <div
+              onClick={() => {
+                props.like(props.post._id);
+              }}
+            >
+              <FaHeart />
+            </div>
+          );
+        }
+        return (
+          <div
+            onClick={() => {
+              props.like(props.post._id);
+            }}
+          >
+            <FaRegHeart />
+          </div>
+        );
+    }
+  }
+
   return (
     <div className={classes.main}>
       <p className={classes.postedBy}>
@@ -17,22 +70,11 @@ const PostInfo = props => {
         at {props.post.updatedTime ? props.post.updatedTime : props.post.createdAt}
       </p>
       <span className={classes.comment}>
-        <span>{props.post.comments.filter(comment => comment.approved).length}</span>{" "}
-        <div onClick={props.commentClickHandler}>
-          <FaRegComment />
-        </div>
+        <span>{props.post.comments.filter(comment => comment.approved).length}</span> {crutch("comment")}
       </span>
       <span className={classes.like}>
         <span>{props.post.likes.length}</span>
-        {props.isLiked ? (
-          <div onClick={props.like}>
-            <FaHeart />
-          </div>
-        ) : (
-          <div onClick={props.like}>
-            <FaRegHeart />
-          </div>
-        )}
+        {crutch("like")}
       </span>
       <hr />
     </div>
