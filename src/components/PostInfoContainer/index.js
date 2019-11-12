@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PostInfo from "./PostInfo";
 
 export default function PostInfoContainer(props) {

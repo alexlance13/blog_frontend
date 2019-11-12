@@ -9,3 +9,5 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT_ACTION = "REMOVE_COMMENT_ACTION";
 export const ADD_LIKE = "ADD_LIKE";
 export const REMOVE_LIKE = "REMOVE_LIKE";
+export const LOG_OUT = "LOG_OUT";
+export const UPDATE_POST = "UPDATE_POST";

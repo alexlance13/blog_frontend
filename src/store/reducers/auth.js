@@ -1,9 +1,21 @@
-import { SET_USER_INFO } from "../actions/types";
+import { SET_USER_INFO, LOG_OUT } from "../actions/types";
+
+let userInfo = localStorage.getItem("userInfo");
+let userId,
+  token = "";
+let isLoggedIn = false;
+
+try {
+  userInfo = JSON.parse(userInfo);
+  userId = userInfo.userId;
+  token = userInfo.token;
+  isLoggedIn = true;
+} catch (e) {}
 
 const initialState = {
-  userId: "5d9f267255ceaa077986a82c",
-  token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwb3N0cyI6W10sIl9pZCI6IjVkOWYyNjcyNTVjZWFhMDc3OTg2YTgyYyIsImxvZ2luIjoiTHVjaWsiLCJwYXNzd29yZCI6InNoYTEkNzgyYjc1NzAkMSRiMTg2YzUwZGNmNWRhNDY3MWY0MWQ2Y2ExNTFjOTY4OTM1NzY1ZTMzIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTczMzExNzEyfQ.5D7uUA-KKvvMTpMhy45rI0H94sxjVTpJso8ceT-YRy0"
+  userId,
+  token,
+  isLoggedIn
 };
 
 export default function authReducer(state = initialState, action) {
@@ -12,7 +24,15 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         userId: action.payload.userId,
-        token: action.payload.token
+        token: action.payload.token,
+        isLoggedIn: true
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        userId: "",
+        token: "",
+        isLoggedIn: false
       };
     default:
       return state;

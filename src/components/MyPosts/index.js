@@ -2,16 +2,16 @@ import React from "react";
 import Posts from "../PostsContainer";
 import Header from "../Header";
 
-const Home = () => {
+const MyPosts = () => {
   return (
     <div>
       <Header
         title="Clean Blog"
         subtitle="A Clean Blog Theme by Start Bootstrap"
       ></Header>
-      <Posts home={true} />
+      <Posts />
     </div>
   );
 };
 
-export default Home;
+export default MyPosts;

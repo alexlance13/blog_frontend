@@ -6,20 +6,20 @@ export default function CommentForm(props) {
 
   return (
     <div className={classes.main}>
-      <div class="form-group shadow-textarea">
+      <div className="form-group shadow-textarea">
         <textarea
           value={value}
-          class="form-control z-depth-1"
+          className="form-control z-depth-1"
           id="exampleFormControlTextarea6"
           rows="3"
           placeholder="Write your comment here..."
           onChange={e => setValue(e.target.value)}
         ></textarea>
       </div>
-      <div class="col-auto">
+      <div className="col-auto">
         <button
           type="submit"
-          class="btn btn-primary mb-2"
+          className="btn btn-primary mb-2"
           onClick={() => {
             props.submitHandler(value);
             setValue(" ");

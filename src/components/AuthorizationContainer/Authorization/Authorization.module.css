@@ -6,7 +6,6 @@ h2 {
   padding: 50px;
 }
 .buttons {
-  margin: 50px;
   display: grid;
   grid-template: 1fr / 1fr 1fr;
   grid-gap: 125px;

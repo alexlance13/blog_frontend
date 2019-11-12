@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Posts from "./Posts";
-import { fetchPosts, like } from "../../store/actions/posts";
+import { fetchPosts } from "../../store/actions/posts";
 
 class PostsContainer extends Component {
   componentDidMount() {
@@ -15,9 +15,12 @@ class PostsContainer extends Component {
   render() {
     return (
       <Posts
-        likeClickHandler={this.likeClickHandler}
         loading={this.props.loading}
-        posts={this.props.posts}
+        posts={
+          this.props.home
+            ? this.props.posts
+            : this.props.posts.filter(post => post.owner._id === this.props.userId)
+        }
         userId={this.props.userId}
         token={this.props.token}
       />
@@ -28,7 +31,6 @@ class PostsContainer extends Component {
 function mapStateToProps(state) {
   return {
     posts: state.posts.posts,
-    singlePost: state.posts.singlePost,
     loading: state.posts.loading,
     userId: state.auth.userId,
     token: state.auth.token
@@ -37,8 +39,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchPosts: () => dispatch(fetchPosts()),
-    like: (id, token, isLiked) => dispatch(like(id, token, isLiked))
+    fetchPosts: () => dispatch(fetchPosts())
   };
 }
 

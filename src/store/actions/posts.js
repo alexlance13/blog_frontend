@@ -9,7 +9,8 @@ import {
   ADD_COMMENT,
   REMOVE_COMMENT_ACTION,
   ADD_LIKE,
-  REMOVE_LIKE
+  REMOVE_LIKE,
+  UPDATE_POST
 } from "../actions/types";
 
 export function fetchPosts() {
@@ -88,7 +89,11 @@ export function setComment(postId, text, token) {
         "content-type": "application/json",
         authorization: `Bearer ${token}`
       };
-      const response = await axios.post("/comment", { text, postId }, { headers });
+      const response = await axios.post(
+        "/comment",
+        { text, postId },
+        { headers }
+      );
       dispatch(addComment(response.data));
     } catch (e) {
       console.error("Sending comment error:", e);
@@ -129,7 +134,10 @@ export function like(postId, token, isLiked) {
   return async dispatch => {
     const params = { postId };
     const config = {
-      headers: { "content-type": "application/json", authorization: `Bearer ${token}` }
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${token}`
+      }
     };
     const res = await axios.post("/like", params, config);
     isLiked ? dispatch(removeLike(res.data)) : dispatch(addLike(res.data));
@@ -147,5 +155,30 @@ export function removeLike(like) {
   return {
     type: REMOVE_LIKE,
     like
+  };
+}
+
+export function updatePost(title, subtitle, text, postId, token) {
+  return async dispatch => {
+    try {
+      const params = { title, subtitle, text };
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${token}`
+        }
+      };
+      await axios.put(`/posts/${postId}`, params, config);
+      dispatch(updatePostAction(params));
+    } catch (e) {
+      console.error("Updating post error ", e);
+    }
+  };
+}
+
+export function updatePostAction(data) {
+  return {
+    type: UPDATE_POST,
+    data
   };
 }

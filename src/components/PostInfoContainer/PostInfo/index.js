@@ -56,16 +56,15 @@ const PostInfo = props => {
             <FaRegHeart />
           </div>
         );
+      default:
+        return null;
     }
   }
 
   return (
     <div className={classes.main}>
       <p className={classes.postedBy}>
-        Posted by{" "}
-        <NavLink exac to="/">
-          {props.post.owner.login}
-        </NavLink>{" "}
+        Posted by <NavLink to="/">{props.post.owner.login}</NavLink>{" "}
         {props.post.updatedTime ? "updated " : ""}
         at {props.post.updatedTime ? props.post.updatedTime : props.post.createdAt}
       </p>

@@ -7,9 +7,27 @@ export default function Header(props) {
     <div className={classes.main}>
       <NavBar></NavBar>
       <div>
-        <h1>{props.head}</h1>
+        {props.editing ? (
+          <input
+            className={classes.h1}
+            type="text"
+            value={props.title}
+            onChange={e => props.setTitle(e)}
+          />
+        ) : (
+          <h1>{props.title}</h1>
+        )}
         <hr className={classes.small} />
-        <p>{props.neck}</p>
+        {props.editing ? (
+          <input
+            className={classes.p}
+            type="text"
+            value={props.title}
+            onChange={e => props.setSubtitle(e)}
+          />
+        ) : (
+          <p>{props.subtitle}</p>
+        )}
       </div>
     </div>
   );
