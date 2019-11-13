@@ -22,6 +22,16 @@ export default function PostPrev(props) {
         token={props.token}
         likeClickHandler={props.likeClickHandler}
       ></PostInfo>
+      {props.admin && (
+        <div>
+          <button type="button" className="btn btn-danger">
+            Danger
+          </button>
+          <button type="button" className="btn btn-success">
+            Success
+          </button>
+        </div>
+      )}
     </div>
   ) : null;
 }

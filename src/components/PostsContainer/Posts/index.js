@@ -9,6 +9,7 @@ const Posts = props => {
     <div>
       {props.posts.map((post, i) => (
         <PostPrev
+          admin={props.admin}
           key={i}
           post={post}
           userId={props.userId}

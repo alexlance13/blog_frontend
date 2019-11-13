@@ -1,4 +1,4 @@
-import { SET_USER_INFO, LOG_OUT } from "./types";
+import { SET_USER_INFO, LOG_OUT, SET_USER } from "./types";
 import axios from "../../axios";
 
 export function loginUser(login, password) {
@@ -14,6 +14,9 @@ export function loginUser(login, password) {
         userId: res.data.userId
       };
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      const response = await axios.get(`/users/${res.data.userId}`);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      dispatch(setUserAction(response.data));
     } catch (e) {
       console.error("auth error: ", e);
     }
@@ -33,6 +36,9 @@ export function registerUser(login, password) {
         userId: res.data.userId
       };
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      const response = await axios.get(`/users/${res.data.userId}`);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      dispatch(setUserAction(response.data));
     } catch (e) {
       console.error("auth error: ", e);
     }
@@ -48,13 +54,22 @@ export function setUserInfo(token, userId) {
 
 export function logOut() {
   return dispatch => {
-    localStorage.setItem("userInfo", {});
+    localStorage.setItem("userInfo", JSON.stringify({}));
+    localStorage.setItem("user", JSON.stringify({}));
     dispatch(logOutAction());
+    dispatch(setUserAction({}));
   };
 }
 
 export function logOutAction() {
   return {
     type: LOG_OUT
+  };
+}
+
+export function setUserAction(user) {
+  return {
+    type: SET_USER,
+    user
   };
 }

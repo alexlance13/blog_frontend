@@ -32,32 +32,28 @@ const Authorization = props => {
           />
         </div>
         <div className={classes.buttons}>
-          <NavLink to="/">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => {
-                props.registerButtonHandler(login, password);
-                setLogin("");
-                setPassword("");
-              }}
-            >
-              Sign up
-            </button>
-          </NavLink>
-          <NavLink to="/">
-            <button
-              type="button"
-              className="btn btn-info"
-              onClick={() => {
-                props.loginButtonHandler(login, password);
-                setLogin("");
-                setPassword("");
-              }}
-            >
-              Log in
-            </button>
-          </NavLink>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => {
+              props.registerButtonHandler(login, password);
+              setLogin("");
+              setPassword("");
+            }}
+          >
+            <NavLink to="/">Sign up</NavLink>
+          </button>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={() => {
+              props.loginButtonHandler(login, password);
+              setLogin("");
+              setPassword("");
+            }}
+          >
+            <NavLink to="/">Log in</NavLink>
+          </button>
         </div>
       </div>
     </div>

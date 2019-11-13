@@ -6,18 +6,22 @@ import Home from "./components/Home";
 import MyPosts from "./components/MyPosts";
 import PostEditor from "./components/PostEditor";
 import Authorization from "./components/AuthorizationContainer";
+import PrivateRoute from "./components/PrivateRoute";
+import SomeUserPosts from "./components/SomeUserPosts";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/" component={Home}></Route>
-        <Route path="/post/:id" component={SinglePost}></Route>
-        <Route path="/authorization" component={Authorization}></Route>
-        <Route path="/my-posts" component={MyPosts}></Route>
-        <Route path="/post-edit/:id" component={PostEditor}></Route>
-        {/* <Route path="/post/add" component={CreatePost}></Route>
-        <Route path="/admin" component={Admin}></Route>  */}
+        <Route exact path="/" component={Home} />
+        <Route path="/post/:id" component={SinglePost} />
+        <Route path="/authorization" component={Authorization} />
+        <PrivateRoute path="/my-posts" component={MyPosts} />
+        <Route path="/user-posts/:id" component={SomeUserPosts} />
+        <Route path="/post-edit/:id" component={PostEditor} />
+        <PrivateRoute admin={true} path="/admin" component={AdminPanel} />
+        {/* <PrivateRoute path="/post/add" component={CreatePost} /> */}
       </Switch>
     </>
   );

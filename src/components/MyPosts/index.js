@@ -5,10 +5,7 @@ import Header from "../Header";
 const MyPosts = () => {
   return (
     <div>
-      <Header
-        title="Clean Blog"
-        subtitle="A Clean Blog Theme by Start Bootstrap"
-      ></Header>
+      <Header title="My posts" subtitle="Here you can see your posts"></Header>
       <Posts />
     </div>
   );

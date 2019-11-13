@@ -11,3 +11,5 @@ export const ADD_LIKE = "ADD_LIKE";
 export const REMOVE_LIKE = "REMOVE_LIKE";
 export const LOG_OUT = "LOG_OUT";
 export const UPDATE_POST = "UPDATE_POST";
+export const GET_USER = "GET_USER";
+export const SET_USER = "SET_USER";

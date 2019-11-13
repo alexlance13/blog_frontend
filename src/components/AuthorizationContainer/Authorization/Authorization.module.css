@@ -7,6 +7,24 @@ h2 {
 }
 .buttons {
   display: grid;
-  grid-template: 1fr / 1fr 1fr;
-  grid-gap: 125px;
+  grid-template: 1fr / 140px 140px;
+  grid-gap: 30%;
+  margin: 30px;
+}
+.auth a {
+  font-weight: 700;
+  width: 100% !important;
+  display: block;
+  padding: 0;
+}
+.auth button {
+  padding: 0;
+}
+.btn .btn-primary {
+  padding: 0;
+}
+input {
+  text-align: left !important;
+  border: 1px solid #ccc !important;
+  width: 100% !important;
 }

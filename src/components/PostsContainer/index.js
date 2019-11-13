@@ -13,16 +13,15 @@ class PostsContainer extends Component {
   };
 
   render() {
+    const { token, userId, posts, home, loading, admin } = this.props;
+    const id = this.props.id || userId;
     return (
       <Posts
-        loading={this.props.loading}
-        posts={
-          this.props.home
-            ? this.props.posts
-            : this.props.posts.filter(post => post.owner._id === this.props.userId)
-        }
-        userId={this.props.userId}
-        token={this.props.token}
+        admin={admin}
+        loading={loading}
+        posts={home ? posts : posts.filter(post => post.owner._id === id)}
+        userId={userId}
+        token={token}
       />
     );
   }
@@ -33,7 +32,8 @@ function mapStateToProps(state) {
     posts: state.posts.posts,
     loading: state.posts.loading,
     userId: state.auth.userId,
-    token: state.auth.token
+    token: state.auth.token,
+    user: state.auth.user
   };
 }
 
@@ -43,7 +43,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PostsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);
