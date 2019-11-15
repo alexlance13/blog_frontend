@@ -18,7 +18,7 @@ const SinglePost = props => {
             .join(" ") + "..."
         }
         title={props.title || props.post.title}
-        setSubt={props.setSubt}
+        setSubtitle={props.setSubtitle}
         setTitle={props.setTitle}
         editing={props.isEditing}
       />
@@ -46,9 +46,7 @@ const SinglePost = props => {
         {!props.isEditing &&
           props.isCommentsOpened &&
           (props.isNewCommentPosted ? (
-            <div className="modal-dialog modal-lg">
-              Your comment is on check by admin
-            </div>
+            <div className="modal-dialog modal-lg">Your comment is on check by admin</div>
           ) : (
             <Comments
               removeCommentHandler={props.removeCommentHandler}
@@ -59,28 +57,30 @@ const SinglePost = props => {
           ))}
         {props.post.owner._id === props.userId &&
           (props.isEditing ? (
-            <button type="button" className="btn btn-success">
-              <NavLink
-                onClick={() => props.updatePostHandler()}
-                className={classes.button}
-                to={`/post/${props.post._id}`}
-              >
-                Save
-              </NavLink>
-            </button>
+            <NavLink
+              type="button"
+              className="btn btn-success"
+              onClick={() => props.updatePostHandler()}
+              to={`/post/${props.post._id}`}
+            >
+              Save
+            </NavLink>
           ) : (
-            <button type="button" className="btn btn-success">
-              <NavLink
-                className={classes.button}
-                to={`/post-edit/${props.post._id}`}
-              >
+            <div className={classes.buttons}>
+              <NavLink type="button" className="btn btn-success" to={`/post-edit/${props.post._id}`}>
                 Edit
               </NavLink>
-            </button>
+              <NavLink
+                type="button"
+                className="btn btn-danger"
+                onClick={() => props.postRemoveHandler()}
+                to="/"
+              >
+                Remove
+              </NavLink>
+            </div>
           ))}
-        {!props.isEditing && (
-          <CommentForm submitHandler={props.submitHandler} />
-        )}
+        {!props.isEditing && <CommentForm submitHandler={props.submitHandler} />}
       </div>
     </div>
   ) : null;

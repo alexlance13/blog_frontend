@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SinglePost from "./SinglePost";
-import {
-  fetchSinglePost,
-  setComment,
-  removeComment,
-  like
-} from "../../store/actions/posts";
+import { fetchSinglePost, setComment, removeComment, like, removePost } from "../../store/actions/posts";
 
 class SinglePostContainer extends Component {
   constructor(props) {
@@ -24,11 +19,7 @@ class SinglePostContainer extends Component {
   }
 
   submitHandler = async commentData => {
-    this.props.setComment(
-      this.props.match.params.id,
-      commentData,
-      this.props.token
-    );
+    this.props.setComment(this.props.match.params.id, commentData, this.props.token);
     this.setState({
       isCommentsOpened: true,
       isNewCommentPosted: true
@@ -40,20 +31,24 @@ class SinglePostContainer extends Component {
     }, 2000);
   };
 
-  removeCommentHandler = async id => {
+  removeCommentHandler = id => {
     this.props.removeComment(id, this.props.token);
   };
 
-  commentClickHandler = () =>
-    this.setState({ isCommentsOpened: !this.state.isCommentsOpened });
+  commentClickHandler = () => this.setState({ isCommentsOpened: !this.state.isCommentsOpened });
 
   likeClickHandler = (id, isLiked) => {
     this.props.like(id, this.props.token, isLiked);
   };
 
+  postRemoveHandler = () => {
+    this.props.removePost(this.props.singlePost._id, this.props.token);
+  };
+
   render() {
     return (
       <SinglePost
+        postRemoveHandler={this.postRemoveHandler}
         updatePostHandler={this.props.updatePostHandler}
         subtitle={this.props.subtitle}
         title={this.props.title}
@@ -89,12 +84,9 @@ function mapDispatchToProps(dispatch) {
     fetchSinglePost: id => dispatch(fetchSinglePost(id)),
     like: (postId, token, isLiked) => dispatch(like(postId, token, isLiked)),
     removeComment: (id, token) => dispatch(removeComment(id, token)),
-    setComment: (postId, text, token) =>
-      dispatch(setComment(postId, text, token))
+    removePost: (id, token) => dispatch(removePost(id, token)),
+    setComment: (postId, text, token) => dispatch(setComment(postId, text, token))
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SinglePostContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePostContainer);

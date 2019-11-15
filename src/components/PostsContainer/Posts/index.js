@@ -9,6 +9,8 @@ const Posts = props => {
     <div>
       {props.posts.map((post, i) => (
         <PostPrev
+          onApproveHandle={props.onApproveHandle}
+          onRemoveHandle={props.onRemoveHandle}
           admin={props.admin}
           key={i}
           post={post}

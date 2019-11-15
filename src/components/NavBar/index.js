@@ -25,6 +25,7 @@ class NavBar extends Component {
                 <NavLink to="/my-posts">MY POSTS</NavLink>
               </li>
             )}
+            <li>{this.props.user.isAdmin && <NavLink to="/admin">ADMIN</NavLink>}</li>
             <li>
               {this.props.isLoggedIn ? (
                 <NavLink to="/" onClick={() => this.props.logOut()}>
@@ -43,7 +44,8 @@ class NavBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    user: state.auth.user
   };
 }
 
@@ -53,7 +55,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

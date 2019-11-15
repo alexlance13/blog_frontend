@@ -21,7 +21,7 @@ const Authorization = props => {
             onChange={e => setLogin(e.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group auth">
           <label htmlFor="pwd">Password:</label>
           <input
             type="password"
@@ -32,7 +32,8 @@ const Authorization = props => {
           />
         </div>
         <div className={classes.buttons}>
-          <button
+          <NavLink
+            to="/"
             type="button"
             className="btn btn-primary"
             onClick={() => {
@@ -41,9 +42,10 @@ const Authorization = props => {
               setPassword("");
             }}
           >
-            <NavLink to="/">Sign up</NavLink>
-          </button>
-          <button
+            Sign up
+          </NavLink>
+          <NavLink
+            to="/"
             type="button"
             className="btn btn-info"
             onClick={() => {
@@ -52,8 +54,8 @@ const Authorization = props => {
               setPassword("");
             }}
           >
-            <NavLink to="/">Log in</NavLink>
-          </button>
+            Log in
+          </NavLink>
         </div>
       </div>
     </div>

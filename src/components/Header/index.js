@@ -14,7 +14,12 @@ export default function Header(props) {
         )}
         <hr className={classes.small} />
         {props.editing ? (
-          <input className={classes.p} type="text" value={props.title} onChange={e => props.setSubtitle(e)} />
+          <input
+            className={classes.p}
+            type="text"
+            value={props.subtitle}
+            onChange={e => props.setSubtitle(e)}
+          />
         ) : (
           <p>{props.subtitle}</p>
         )}

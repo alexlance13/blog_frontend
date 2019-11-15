@@ -18,9 +18,7 @@ export function fetchPosts() {
     dispatch(fetchPostsStart());
     try {
       const response = await axios.get("/posts");
-      setTimeout(() => {
-        dispatch(fetchPostsSuccess(response.data));
-      }, 1000);
+      dispatch(fetchPostsSuccess(response.data));
     } catch (e) {
       console.error("Fetch posts error", e);
       dispatch(fetchPostsError(e));
@@ -89,11 +87,7 @@ export function setComment(postId, text, token) {
         "content-type": "application/json",
         authorization: `Bearer ${token}`
       };
-      const response = await axios.post(
-        "/comment",
-        { text, postId },
-        { headers }
-      );
+      const response = await axios.post("/comment", { text, postId }, { headers });
       dispatch(addComment(response.data));
     } catch (e) {
       console.error("Sending comment error:", e);
@@ -180,5 +174,40 @@ export function updatePostAction(data) {
   return {
     type: UPDATE_POST,
     data
+  };
+}
+
+export function approvePost(postId, token) {
+  return async dispatch => {
+    try {
+      const params = { update: "update" };
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${token}`
+        }
+      };
+      await axios.put(`/posts/${postId}`, params, config);
+      dispatch(fetchPosts());
+    } catch (e) {
+      console.log("post approve error ", e);
+    }
+  };
+}
+
+export function removePost(postId, token) {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${token}`
+        }
+      };
+      await axios.delete(`/posts/${postId}`, config);
+      dispatch(fetchPosts());
+    } catch (e) {
+      console.log("post approve error ", e);
+    }
   };
 }

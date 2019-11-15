@@ -17,6 +17,8 @@ class PostsContainer extends Component {
     const id = this.props.id || userId;
     return (
       <Posts
+        onApproveHandle={this.props.onApproveHandle}
+        onRemoveHandle={this.props.onRemoveHandle}
         admin={admin}
         loading={loading}
         posts={home ? posts : posts.filter(post => post.owner._id === id)}
