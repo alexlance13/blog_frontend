@@ -12,10 +12,10 @@ class SinglePostContainer extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.props.match
-      ? await this.props.fetchSinglePost(this.props.match.params.id)
-      : await this.props.fetchSinglePost(this.props.id);
+      ? this.props.fetchSinglePost(this.props.match.params.id)
+      : this.props.fetchSinglePost(this.props.id);
   }
 
   submitHandler = async commentData => {
@@ -48,6 +48,12 @@ class SinglePostContainer extends Component {
   render() {
     return (
       <SinglePost
+        onChangeHandler={this.onChangeHandler}
+        onSave={this.props.onSave}
+        postId={this.props.postId}
+        createPostHandler={this.props.createPostHandler}
+        isCreating={this.props.isCreating}
+        user={this.props.user}
         postRemoveHandler={this.postRemoveHandler}
         updatePostHandler={this.props.updatePostHandler}
         subtitle={this.props.subtitle}
@@ -75,7 +81,8 @@ function mapStateToProps(state) {
   return {
     singlePost: state.posts.singlePost,
     userId: state.auth.userId,
-    token: state.auth.token
+    token: state.auth.token,
+    user: state.auth.user
   };
 }
 

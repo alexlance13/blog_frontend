@@ -21,3 +21,7 @@ textarea[type="text"] {
   display: grid;
   grid-template: 1fr / 1fr 1fr;
 }
+[contentEditable="true"]:empty:not(:focus):before {
+  content: attr(data-text);
+  color: #333333;
+}

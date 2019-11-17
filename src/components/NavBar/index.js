@@ -22,6 +22,11 @@ class NavBar extends Component {
             </li>
             {this.props.isLoggedIn && (
               <li>
+                <NavLink to="/post-edit/5dd052eb46471726995ebefe">ADD POST</NavLink>
+              </li>
+            )}
+            {this.props.isLoggedIn && (
+              <li>
                 <NavLink to="/my-posts">MY POSTS</NavLink>
               </li>
             )}

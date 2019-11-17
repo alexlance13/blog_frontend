@@ -3,9 +3,7 @@ import {
   FETCH_POSTS_START,
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_ERROR,
-  FETCH_SINGLE_POST_START,
   FETCH_SINGLE_POST_SUCCESS,
-  FETCH_SINGLE_POST_ERROR,
   ADD_COMMENT,
   REMOVE_COMMENT_ACTION,
   ADD_LIKE,
@@ -48,21 +46,12 @@ export function fetchPostsError(e) {
 
 export function fetchSinglePost(id) {
   return async dispatch => {
-    dispatch(fetchSinglePostStart());
     try {
       const response = await axios.get(`/posts/${id}`);
       dispatch(fetchSinglePostSuccess(response.data));
     } catch (error) {
       console.error("Fetch single post error", error);
-      dispatch(fetchSinglePostError(error));
     }
-  };
-}
-
-export function fetchSinglePostStart() {
-  return {
-    type: FETCH_SINGLE_POST_START,
-    loading: true
   };
 }
 
@@ -70,13 +59,6 @@ export function fetchSinglePostSuccess(singlePost) {
   return {
     type: FETCH_SINGLE_POST_SUCCESS,
     singlePost
-  };
-}
-
-export function fetchSinglePostError(error) {
-  return {
-    type: FETCH_SINGLE_POST_ERROR,
-    error
   };
 }
 
@@ -176,11 +158,25 @@ export function updatePostAction(data) {
     data
   };
 }
+export async function createPost(title, subtitle, text, token) {
+  try {
+    const params = { title, subtitle, text };
+    const config = {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${token}`
+      }
+    };
+    return await axios.post("/posts/", params, config);
+  } catch (e) {
+    console.error("Creating post error ", e);
+  }
+}
 
 export function approvePost(postId, token) {
   return async dispatch => {
     try {
-      const params = { update: "update" };
+      const params = { approved: true };
       const config = {
         headers: {
           "content-type": "application/json",

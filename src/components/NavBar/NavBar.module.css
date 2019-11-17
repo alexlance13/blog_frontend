@@ -1,11 +1,11 @@
 .navBar {
   align-items: center;
   display: grid;
-  grid-template: 1fr / 300px 1fr 20px;
+  grid-template: 1fr / 250px 1fr 20px;
 }
 ul {
   display: grid;
-  grid-template: 1fr / auto auto auto auto;
+  grid-template: 1fr / auto auto auto auto auto;
   justify-content: right;
   padding: 0;
   margin: 0;

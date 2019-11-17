@@ -36,10 +36,7 @@ export default function PostPrev(props) {
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => {
-              console.log(props.post._id);
-              props.onApproveHandle(props.post._id);
-            }}
+            onClick={() => props.onApproveHandle(props.post._id)}
           >
             <TiTick />
           </button>

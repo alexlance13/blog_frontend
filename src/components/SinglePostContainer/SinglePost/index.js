@@ -7,7 +7,7 @@ import CommentForm from "./CommentForm";
 import { NavLink } from "react-router-dom";
 
 const SinglePost = props => {
-  return props.post.approved ? (
+  return props.post.title ? (
     <div className={classes.main}>
       <Header
         subtitle={
@@ -25,6 +25,7 @@ const SinglePost = props => {
       <div className={classes.postBody}>
         {props.isEditing ? (
           <div
+            data-text="Click to enter text"
             contentEditable={true}
             suppressContentEditableWarning={true}
             onBlur={e => props.onBlurHandler(e)}
@@ -55,16 +56,11 @@ const SinglePost = props => {
               token={props.token}
             />
           ))}
-        {props.post.owner._id === props.userId &&
+        {(props.user.isAdmin || props.post.owner._id === props.userId) &&
           (props.isEditing ? (
-            <NavLink
-              type="button"
-              className="btn btn-success"
-              onClick={() => props.updatePostHandler()}
-              to={`/post/${props.post._id}`}
-            >
+            <button type="button" className="btn btn-success" onClick={() => props.onSave(props.post)}>
               Save
-            </NavLink>
+            </button>
           ) : (
             <div className={classes.buttons}>
               <NavLink type="button" className="btn btn-success" to={`/post-edit/${props.post._id}`}>
