@@ -21,7 +21,6 @@ function App() {
         <Route path="/user-posts/:id" component={SomeUserPosts} />
         <Route path="/post-edit/:id" component={PostEditor} />
         <PrivateRoute admin={true} path="/admin" component={AdminPanel} />
-        {/* <PrivateRoute path="/post/add" component={CreatePost} /> */}
       </Switch>
     </>
   );

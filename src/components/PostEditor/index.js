@@ -24,9 +24,9 @@ class PostEditor extends Component {
     });
   }
 
-  onChangeHandler = e => {
+  onChangeHandler = text => {
     this.setState({
-      text: e.target.innerHTML
+      text
     });
   };
 

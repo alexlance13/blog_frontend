@@ -4,18 +4,14 @@ import { NavLink } from "react-router-dom";
 import PostInfo from "../PostInfoContainer";
 import { MdDelete } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
+import HTMLtoReactParser from "../../helpers/HTMLtoReactParser";
 
 export default function PostPrev(props) {
   const body = (
     <div className={classes.main}>
       <NavLink to={`/post/${props.post._id}`}>
         <h1>{props.post.title}</h1>
-        <p>
-          {props.post.text
-            .split(" ")
-            .slice(0, 15)
-            .join(" ") + "..."}
-        </p>
+        <div className={classes.textWrapper}>{HTMLtoReactParser(props.post.text)}</div>
       </NavLink>
       <PostInfo
         disabled={true}

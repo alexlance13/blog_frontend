@@ -6,13 +6,18 @@
   color: #333333;
 }
 .main a:hover,
-.main a:focus {
+.main a:focus,
+.textWrapper:hover,
+.textWrapper:focus {
   text-decoration: none;
   color: #0085a1;
 }
 h1 {
   margin: 10px 0;
 }
-p {
+.textWrapper {
+  width: inherit;
   font-size: 20px;
+  overflow: hidden;
+  max-height: 350px;
 }

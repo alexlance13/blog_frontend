@@ -48,7 +48,7 @@ class SinglePostContainer extends Component {
   render() {
     return (
       <SinglePost
-        onChangeHandler={this.onChangeHandler}
+        onChangeHandler={this.props.onChangeHandler}
         onSave={this.props.onSave}
         postId={this.props.postId}
         createPostHandler={this.props.createPostHandler}
@@ -61,7 +61,6 @@ class SinglePostContainer extends Component {
         setSubtitle={this.props.setSubtitle}
         setTitle={this.props.setTitle}
         text={this.props.text}
-        onBlurHandler={this.props.onBlurHandler}
         isEditing={this.props.isEditing}
         post={this.props.singlePost}
         userId={this.props.userId}

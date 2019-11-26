@@ -5,35 +5,25 @@ import Header from "../../Header";
 import PostInfo from "../../PostInfoContainer";
 import CommentForm from "./CommentForm";
 import { NavLink } from "react-router-dom";
+import TextEditor from "../../Editor";
+import HTMLtoReactParser from "../../../helpers/HTMLtoReactParser";
 
 const SinglePost = props => {
   return props.post.title ? (
     <div className={classes.main}>
       <Header
-        subtitle={
-          props.subtitle ||
-          props.post.text
-            .split(" ")
-            .slice(0, 12)
-            .join(" ") + "..."
-        }
+        subtitle={props.subtitle || props.post.subtitle}
         title={props.title || props.post.title}
         setSubtitle={props.setSubtitle}
         setTitle={props.setTitle}
         editing={props.isEditing}
       />
       <div className={classes.postBody}>
-        {props.isEditing ? (
-          <div
-            data-text="Click to enter text"
-            contentEditable={true}
-            suppressContentEditableWarning={true}
-            onBlur={e => props.onBlurHandler(e)}
-          >
-            {props.text}
-          </div>
-        ) : (
-          <p>{props.post.text}</p>
+        <TextEditor
+          body={props.isCreating ? "Put your text here" : props.post.text}
+          onChangeHandler={props.onChangeHandler}
+        />
+        ) : (<p>{HTMLtoReactParser(props.post.text)}</p>
         )}
         {!props.isEditing && (
           <PostInfo

@@ -161,6 +161,7 @@ export function updatePostAction(data) {
 export async function createPost(title, subtitle, text, token) {
   try {
     const params = { title, subtitle, text };
+    console.log(subtitle);
     const config = {
       headers: {
         "content-type": "application/json",
