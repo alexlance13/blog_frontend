@@ -12,15 +12,10 @@ p {
   margin-top: 30px;
   width: 100%;
 }
-textarea[type="text"] {
-  resize: none;
-  background: transparent;
-  border: none;
-  width: 100%;
-  text-align: center;
-  outline: none;
-}
 .buttons {
   display: grid;
   grid-template: 1fr / 1fr 1fr;
+}
+.editing {
+  overflow: visible;
 }

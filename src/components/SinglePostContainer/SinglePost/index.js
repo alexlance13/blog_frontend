@@ -9,6 +9,8 @@ import TextEditor from "../../Editor";
 import HTMLtoReactParser from "../../../helpers/HTMLtoReactParser";
 
 const SinglePost = props => {
+  const cls = [classes.postBody];
+  props.isEditing && cls.push(classes.editing);
   return props.post.title ? (
     <div className={classes.main}>
       <Header
@@ -18,12 +20,15 @@ const SinglePost = props => {
         setTitle={props.setTitle}
         editing={props.isEditing}
       />
-      <div className={classes.postBody}>
-        <TextEditor
-          body={props.isCreating ? "Put your text here" : props.post.text}
-          onChangeHandler={props.onChangeHandler}
-        />
-        ) : (<p>{HTMLtoReactParser(props.post.text)}</p>
+      <div class={cls.join(" ")}>
+        {props.isEditing ? (
+          <TextEditor
+            token={props.token}
+            body={props.isCreating ? "Put your text here" : props.post.text}
+            onChangeHandler={props.onChangeHandler}
+          />
+        ) : (
+          <p>{HTMLtoReactParser(props.post.text)}</p>
         )}
         {!props.isEditing && (
           <PostInfo
