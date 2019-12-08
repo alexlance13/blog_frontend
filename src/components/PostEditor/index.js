@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SinglePost from "../SinglePostContainer";
+import SinglePost from "../../containers/SinglePostContainer";
 import { connect } from "react-redux";
 import { fetchSinglePost, updatePost, createPost } from "../../store/actions/posts";
 
@@ -9,7 +9,8 @@ class PostEditor extends Component {
     this.state = {
       text: "",
       subtitle: "",
-      title: ""
+      title: "",
+      isCreating: this.props.match.params.id === "5ded74cb4323972c772c37a9"
     };
   }
 
@@ -18,7 +19,7 @@ class PostEditor extends Component {
       ? await this.props.fetchSinglePost(this.props.match.params.id)
       : await this.props.fetchSinglePost(this.props.id);
     this.setState({
-      text: this.props.singlePost.text,
+      text: this.state.isCreating ? " " : this.props.singlePost.text,
       subtitle: this.props.singlePost.subtitle,
       title: this.props.singlePost.title
     });
@@ -43,22 +44,16 @@ class PostEditor extends Component {
   };
 
   updatePostHandler = () => {
-    this.props.updatePost(
-      this.state.title,
-      this.state.subtitle,
-      this.state.text,
-      this.props.singlePost._id,
-      this.props.token
-    );
+    this.props.updatePost(this.state.title, this.state.subtitle, this.state.text, this.props.singlePost._id);
     this.props.history.push(`/post/${this.props.singlePost._id}`);
   };
   createPostHandler = async () => {
-    const res = await createPost(this.state.title, this.state.subtitle, this.state.text, this.props.token);
+    const res = await createPost(this.state.title, this.state.subtitle, this.state.text);
     this.props.history.push(`/post/${res.data._id}`);
   };
 
   onSave = post => {
-    post._id === "5dd052eb46471726995ebefe" ? this.createPostHandler() : this.updatePostHandler();
+    post._id === "5ded74cb4323972c772c37a9" ? this.createPostHandler() : this.updatePostHandler();
   };
 
   render() {
@@ -75,7 +70,7 @@ class PostEditor extends Component {
         text={this.state.text}
         onChangeHandler={this.onChangeHandler}
         isEditing={true}
-        isCreating={this.props.isCreating}
+        isCreating={this.state.isCreating}
         id={this.props.match.params.id}
       />
     );
@@ -84,16 +79,14 @@ class PostEditor extends Component {
 
 function mapStateToProps(state) {
   return {
-    singlePost: state.posts.singlePost,
-    token: state.auth.token
+    singlePost: state.posts.singlePost
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchSinglePost: id => dispatch(fetchSinglePost(id)),
-    updatePost: (title, subtitle, text, postId, token) =>
-      dispatch(updatePost(title, subtitle, text, postId, token))
+    updatePost: (title, subtitle, text, postId) => dispatch(updatePost(title, subtitle, text, postId))
   };
 }
 

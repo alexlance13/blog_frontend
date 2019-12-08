@@ -1,5 +1,17 @@
-import Axios from "axios";
+import axios from "axios";
 
-export default Axios.create({
+export const options = {
   baseURL: "http://localhost:3333/"
+};
+const instance = axios.create(options);
+
+instance.interceptors.request.use(function(config) {
+  let userInfo = localStorage.getItem("userInfo");
+  userInfo = JSON.parse(userInfo);
+  if (!userInfo.token) return config;
+  config.headers = { Authorization: "Bearer " + userInfo.token };
+
+  return config;
 });
+
+export default instance;

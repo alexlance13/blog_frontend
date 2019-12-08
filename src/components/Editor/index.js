@@ -5,7 +5,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 import classes from "./Editor.module.css";
-import axios from "../../axios";
+import { imageUpload } from "../../store/actions/posts";
 
 const TextEditor = props => {
   const [model, setModel] = useState("");
@@ -17,15 +17,8 @@ const TextEditor = props => {
     setModel(editorState);
   }, []);
 
-  async function onImageUpload(file) {
-    const data = new FormData();
-    data.append("pics", file);
-    const config = {
-      headers: {
-        authorization: `Bearer ${props.token}`
-      }
-    };
-    const res = await axios.post("/upload", data, config);
+  async function onImageUploadHandler(file) {
+    const res = await imageUpload(file, props.token);
     return { data: { link: res.data.src } };
   }
 
@@ -41,7 +34,7 @@ const TextEditor = props => {
           defaultSize: { width: "78vh" },
           alignmentEnabled: false,
           uploadEnabled: true,
-          uploadCallback: data => onImageUpload(data),
+          uploadCallback: data => onImageUploadHandler(data),
           inputAccept: "image/jpeg,image/jpg,image/png",
           previewImage: true
         },

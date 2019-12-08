@@ -4,11 +4,11 @@ import {
   FETCH_POSTS_SUCCESS,
   FETCH_POSTS_ERROR,
   FETCH_SINGLE_POST_SUCCESS,
-  ADD_COMMENT,
-  REMOVE_COMMENT_ACTION,
   ADD_LIKE,
   REMOVE_LIKE,
-  UPDATE_POST
+  UPDATE_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT_ACTION
 } from "../actions/types";
 
 export function fetchPosts() {
@@ -62,14 +62,10 @@ export function fetchSinglePostSuccess(singlePost) {
   };
 }
 
-export function setComment(postId, text, token) {
+export function setComment(postId, text) {
   return async dispatch => {
     try {
-      const headers = {
-        "content-type": "application/json",
-        authorization: `Bearer ${token}`
-      };
-      const response = await axios.post("/comment", { text, postId }, { headers });
+      const response = await axios.post("/comments", { text, postId });
       dispatch(addComment(response.data));
     } catch (e) {
       console.error("Sending comment error:", e);
@@ -84,14 +80,10 @@ export function addComment(comment) {
   };
 }
 
-export function removeComment(id, token) {
+export function removeComment(id) {
   return async dispatch => {
     try {
-      const headers = {
-        "content-type": "application/json",
-        authorization: `Bearer ${token}`
-      };
-      const response = await axios.delete(`/comment/${id}`, { headers });
+      const response = await axios.delete(`/comment/${id}`);
       dispatch(removeCommentAction(response.data));
     } catch (e) {
       console.error("Remove comment error", e);
@@ -106,16 +98,10 @@ export function removeCommentAction(comment) {
   };
 }
 
-export function like(postId, token, isLiked) {
+export function like(postId, isLiked) {
   return async dispatch => {
     const params = { postId };
-    const config = {
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${token}`
-      }
-    };
-    const res = await axios.post("/like", params, config);
+    const res = await axios.post("/like", params);
     isLiked ? dispatch(removeLike(res.data)) : dispatch(addLike(res.data));
   };
 }
@@ -134,17 +120,11 @@ export function removeLike(like) {
   };
 }
 
-export function updatePost(title, subtitle, text, postId, token) {
+export function updatePost(title, subtitle, text, postId) {
   return async dispatch => {
     try {
       const params = { title, subtitle, text };
-      const config = {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${token}`
-        }
-      };
-      await axios.put(`/posts/${postId}`, params, config);
+      await axios.put(`/posts/${postId}`, params);
       dispatch(updatePostAction(params));
     } catch (e) {
       console.error("Updating post error ", e);
@@ -158,33 +138,30 @@ export function updatePostAction(data) {
     data
   };
 }
-export async function createPost(title, subtitle, text, token) {
+export async function createPost(title, subtitle, text) {
   try {
     const params = { title, subtitle, text };
-    console.log(subtitle);
-    const config = {
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${token}`
-      }
-    };
-    return await axios.post("/posts/", params, config);
+    return await axios.post("/posts/", params);
   } catch (e) {
     console.error("Creating post error ", e);
   }
 }
 
-export function approvePost(postId, token) {
+export async function imageUpload(file) {
+  try {
+    const data = new FormData();
+    data.append("pics", file);
+    return await axios.post("/upload", data);
+  } catch (e) {
+    console.error("Image uploading error ", e);
+  }
+}
+
+export function approvePost(postId) {
   return async dispatch => {
     try {
       const params = { approved: true };
-      const config = {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${token}`
-        }
-      };
-      await axios.put(`/posts/${postId}`, params, config);
+      await axios.put(`/posts/${postId}`, params);
       dispatch(fetchPosts());
     } catch (e) {
       console.log("post approve error ", e);
@@ -192,16 +169,10 @@ export function approvePost(postId, token) {
   };
 }
 
-export function removePost(postId, token) {
+export function removePost(postId) {
   return async dispatch => {
     try {
-      const config = {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${token}`
-        }
-      };
-      await axios.delete(`/posts/${postId}`, config);
+      await axios.delete(`/posts/${postId}`);
       dispatch(fetchPosts());
     } catch (e) {
       console.log("post approve error ", e);

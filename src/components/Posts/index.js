@@ -1,6 +1,6 @@
 import React from "react";
-import PostPrev from "../../PostPrev";
-import Loader from "../../Loader";
+import PostPrev from "../PostPrev";
+import Loader from "../Loader";
 
 const Posts = props => {
   return props.loading ? (
@@ -15,7 +15,6 @@ const Posts = props => {
           key={i}
           post={post}
           userId={props.userId}
-          token={props.token}
           likeClickHandler={props.likeClickHandler}
         ></PostPrev>
       ))}

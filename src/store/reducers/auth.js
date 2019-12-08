@@ -1,9 +1,9 @@
 import { SET_USER_INFO, LOG_OUT, SET_USER } from "../actions/types";
 
 let userInfo = localStorage.getItem("userInfo");
-userInfo = JSON.parse(userInfo);
+userInfo = JSON.parse(userInfo) || {};
 let user = localStorage.getItem("user");
-user = JSON.parse(user);
+user = JSON.parse(user) || {};
 
 const initialState = {
   userId: userInfo.userId,

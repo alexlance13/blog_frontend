@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PostInfo from "./PostInfo";
+import PostInfo from "../components/PostInfo";
 
 export default function PostInfoContainer(props) {
   async function like(id) {
@@ -13,7 +13,6 @@ export default function PostInfoContainer(props) {
       disabled={props.disabled}
       like={like}
       isLiked={isLiked}
-      setIsLiked={setIsLiked}
       post={props.post}
       commentClickHandler={props.commentClickHandler}
     />

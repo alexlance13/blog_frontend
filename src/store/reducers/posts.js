@@ -67,9 +67,7 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         singlePost: {
           ...state.singlePost,
-          comments: state.singlePost.comments.filter(
-            comment => comment._id !== action.comment._id
-          )
+          comments: state.singlePost.comments.filter(comment => comment._id !== action.comment._id)
         }
       };
     case ADD_LIKE:
@@ -87,9 +85,7 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         singlePost: {
           ...state.singlePost,
-          likes: state.singlePost.likes.filter(
-            like => like._id !== action.like._id
-          )
+          likes: state.singlePost.likes.filter(like => like._id !== action.like._id)
         }
       };
     case UPDATE_POST:

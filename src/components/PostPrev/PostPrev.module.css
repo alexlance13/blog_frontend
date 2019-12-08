@@ -1,5 +1,6 @@
 .main {
-  margin: 0 200px 70px 200px;
+  margin: auto;
+  width: 75%;
 }
 .main > a {
   font-weight: 100;

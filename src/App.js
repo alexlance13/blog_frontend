@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
-import SinglePost from "./components/SinglePostContainer";
+import { Route, Switch, Redirect } from "react-router-dom";
+import SinglePost from "./containers/SinglePostContainer";
 import Home from "./components/Home";
 import MyPosts from "./components/MyPosts";
 import PostEditor from "./components/PostEditor";
-import Authorization from "./components/AuthorizationContainer";
+import Authorization from "./containers/AuthoizationContainer";
 import PrivateRoute from "./components/PrivateRoute";
 import SomeUserPosts from "./components/SomeUserPosts";
 import AdminPanel from "./components/AdminPanel";
@@ -21,6 +21,7 @@ function App() {
         <Route path="/user-posts/:id" component={SomeUserPosts} />
         <Route path="/post-edit/:id" component={PostEditor} />
         <PrivateRoute admin={true} path="/admin" component={AdminPanel} />
+        <Redirect to="/" />
       </Switch>
     </>
   );

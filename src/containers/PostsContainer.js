@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Posts from "./Posts";
-import { fetchPosts } from "../../store/actions/posts";
+import Posts from "../components/Posts";
+import { fetchPosts, like } from "../store/actions/posts";
 
 class PostsContainer extends Component {
   componentDidMount() {
@@ -9,11 +9,11 @@ class PostsContainer extends Component {
   }
 
   likeClickHandler = (id, isLiked) => {
-    this.props.like(id, this.props.token, isLiked);
+    this.props.like(id, isLiked);
   };
 
   render() {
-    const { token, userId, posts, home, loading, admin } = this.props;
+    const { userId, posts, home, loading, admin } = this.props;
     const id = this.props.id || userId;
     return (
       <Posts
@@ -21,9 +21,9 @@ class PostsContainer extends Component {
         onRemoveHandle={this.props.onRemoveHandle}
         admin={admin}
         loading={loading}
+        likeClickHandler={this.likeClickHandler}
         posts={home ? posts : posts.filter(post => post.owner._id === id)}
         userId={userId}
-        token={token}
       />
     );
   }
@@ -34,14 +34,14 @@ function mapStateToProps(state) {
     posts: state.posts.posts,
     loading: state.posts.loading,
     userId: state.auth.userId,
-    token: state.auth.token,
     user: state.auth.user
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchPosts: () => dispatch(fetchPosts())
+    fetchPosts: () => dispatch(fetchPosts()),
+    like: (postId, isLiked) => dispatch(like(postId, isLiked))
   };
 }
 

@@ -2,7 +2,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
-  margin: 70px 200px 70px 200px;
+  margin: 70px auto 70px auto;
+  width: 75%;
 }
 p {
   font-size: 20px;
@@ -18,4 +19,8 @@ p {
 }
 .editing {
   overflow: visible;
+}
+.wrap img {
+  display: block;
+  margin: auto;
 }

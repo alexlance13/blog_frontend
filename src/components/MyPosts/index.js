@@ -1,5 +1,5 @@
 import React from "react";
-import Posts from "../PostsContainer";
+import Posts from "../../containers/PostsContainer";
 import Header from "../Header";
 
 const MyPosts = () => {

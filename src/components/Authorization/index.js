@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../../Header";
+import Header from "../Header";
 import classes from "./Authorization.module.css";
 import { NavLink } from "react-router-dom";
 

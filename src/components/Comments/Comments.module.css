@@ -1,5 +1,8 @@
 .comment {
   padding: 15px;
+  display: grid;
+  grid-template: 1fr / auto 1fr 60px;
+  align-items: center;
 }
 .comment a {
   color: #333333;
@@ -7,10 +10,17 @@
   font-style: italic;
 }
 .remove {
-  float: right;
   border: none;
   outline: none;
 }
 .remove:active {
   outline: none;
+}
+.buttons {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr;
+}
+.main {
+  max-width: 968px;
+  margin: auto;
 }

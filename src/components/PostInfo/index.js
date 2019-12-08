@@ -66,7 +66,10 @@ const PostInfo = props => {
       <p className={classes.postedBy}>
         Posted by <NavLink to={`/user-posts/${props.post.owner._id}`}>{props.post.owner.login}</NavLink>{" "}
         {props.post.updatedTime ? "updated " : ""}
-        at {props.post.updatedTime ? props.post.updatedTime : props.post.createdAt}
+        at{" "}
+        {props.post.updatedTime
+          ? props.post.updated_at.toLocaleString()
+          : props.post.created_at.toLocaleString()}
       </p>
       <span className={classes.comment}>
         <span>{props.post.comments.filter(comment => comment.approved).length}</span> {crutch("comment")}

@@ -13,3 +13,6 @@ export const LOG_OUT = "LOG_OUT";
 export const UPDATE_POST = "UPDATE_POST";
 export const GET_USER = "GET_USER";
 export const SET_USER = "SET_USER";
+export const GET_COMMENTS = "GET_COMMENTS";
+export const REMOVE_COMMENT = "REMOVE_COMMENT";
+export const APPROVE_COMMENT = "APPROVE_COMMENT";

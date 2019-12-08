@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Authorization from "./Authorization";
-import { loginUser, registerUser } from "../../store/actions/auth";
+import Authorization from "../components/Authorization";
+import { loginUser, registerUser } from "../store/actions/auth";
 import { connect } from "react-redux";
 
 class AuthorizationContainer extends Component {
@@ -28,12 +28,6 @@ class AuthorizationContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    token: state.auth.token
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     loginUser: (login, password) => dispatch(loginUser(login, password)),
@@ -41,7 +35,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AuthorizationContainer);
+export default connect(null, mapDispatchToProps)(AuthorizationContainer);

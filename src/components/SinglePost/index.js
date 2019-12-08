@@ -1,12 +1,12 @@
 import React from "react";
 import classes from "./SinglePost.module.css";
-import Comments from "../../Comments";
-import Header from "../../Header";
-import PostInfo from "../../PostInfoContainer";
-import CommentForm from "./CommentForm";
+import Comments from "../Comments";
+import Header from "../Header";
+import PostInfo from "../../containers/PostInfoContainer";
+import CommentForm from "../CommentForm";
 import { NavLink } from "react-router-dom";
-import TextEditor from "../../Editor";
-import HTMLtoReactParser from "../../../helpers/HTMLtoReactParser";
+import TextEditor from "../Editor";
+import HTMLtoReactParser from "../../helpers/HTMLtoReactParser";
 
 const SinglePost = props => {
   const cls = [classes.postBody];
@@ -24,18 +24,17 @@ const SinglePost = props => {
         {props.isEditing ? (
           <TextEditor
             token={props.token}
-            body={props.isCreating ? "Put your text here" : props.post.text}
+            body={props.isCreating ? " " : props.post.text}
             onChangeHandler={props.onChangeHandler}
           />
         ) : (
-          <p>{HTMLtoReactParser(props.post.text)}</p>
+          <div className={classes.wrap}>{HTMLtoReactParser(props.post.text)}</div>
         )}
         {!props.isEditing && (
           <PostInfo
             post={props.post}
             userId={props.userId}
             commentClickHandler={props.commentClickHandler}
-            token={props.token}
             likeClickHandler={props.likeClickHandler}
           />
         )}
@@ -46,9 +45,9 @@ const SinglePost = props => {
           ) : (
             <Comments
               removeCommentHandler={props.removeCommentHandler}
-              post={props.post}
+              comments={props.post.comments}
               userId={props.userId}
-              token={props.token}
+              isAdmin={props.user.isAdmin}
             />
           ))}
         {(props.user.isAdmin || props.post.owner._id === props.userId) &&

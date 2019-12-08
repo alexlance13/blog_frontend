@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Posts from "../PostsContainer";
+import Posts from "../../containers/PostsContainer";
 import Header from "../Header";
 import { connect } from "react-redux";
 import { getUser } from "../../store/actions/users";

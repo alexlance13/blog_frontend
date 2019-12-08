@@ -1,0 +1,7 @@
+.main {
+  display: grid;
+  justify-content: center;
+  font-size: 18px;
+  grid-template: 1fr / auto auto auto;
+  align-items: center;
+}
