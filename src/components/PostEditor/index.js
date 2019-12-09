@@ -33,13 +33,13 @@ class PostEditor extends Component {
 
   setSubtitle = e => {
     this.setState({
-      subtitle: e.target.value
+      subtitle: e.target.value || " "
     });
   };
 
   setTitle = e => {
     this.setState({
-      title: e.target.value
+      title: e.target.value || " "
     });
   };
 

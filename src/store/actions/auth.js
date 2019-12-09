@@ -4,7 +4,6 @@ import axios from "../../axios";
 export function loginUser(login, password) {
   return async dispatch => {
     try {
-      console.log(login, password);
       const res = await axios.post("/login", {
         login,
         password

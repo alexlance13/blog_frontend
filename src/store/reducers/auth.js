@@ -19,7 +19,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         userId: action.payload.userId,
         token: action.payload.token,
-        isLoggedIn: true
+        isLoggedIn: !!userInfo.token
       };
     case LOG_OUT:
       return {
