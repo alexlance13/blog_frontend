@@ -12,9 +12,15 @@ class AuthorizationContainer extends Component {
     };
   }
 
-  registerButtonHandler = (login, password) => this.props.registerUser(login, password);
+  registerButtonHandler = async (login, password) => {
+    await this.props.registerUser(login, password);
+    setTimeout(() => this.props.history.push("/"), 2000);
+  };
 
-  loginButtonHandler = (login, password) => this.props.loginUser(login, password);
+  loginButtonHandler = async (login, password) => {
+    await this.props.loginUser(login, password);
+    setTimeout(() => this.props.history.push("/"), 2000);
+  };
 
   render() {
     return (

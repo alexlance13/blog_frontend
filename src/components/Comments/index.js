@@ -13,7 +13,7 @@ export default function Comments(props) {
             <div key={i} className={classes.comment}>
               <NavLink to={`/users/${comment.owner._id}`}>{comment.owner.login} :</NavLink>
               <span>{comment.text}</span>
-              {(comment.owner._id === props.userId || props.admin) && (
+              {(comment.owner._id === props.userId || props.admin || props.isAdmin) && (
                 <div className={classes.buttons}>
                   {!comment.approved && (
                     <button

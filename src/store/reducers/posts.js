@@ -1,7 +1,6 @@
 import {
   FETCH_POSTS_START,
   FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_ERROR,
   FETCH_SINGLE_POST_START,
   FETCH_SINGLE_POST_SUCCESS,
   FETCH_SINGLE_POST_ERROR,
@@ -15,8 +14,7 @@ import {
 const initialState = {
   posts: [],
   singlePost: {},
-  loading: false,
-  error: null
+  loading: false
 };
 
 export default function postsReducer(state = initialState, action) {
@@ -31,12 +29,6 @@ export default function postsReducer(state = initialState, action) {
         ...state,
         loading: false,
         posts: action.posts
-      };
-    case FETCH_POSTS_ERROR:
-      return {
-        ...state,
-        loading: false,
-        error: action.error
       };
     case FETCH_SINGLE_POST_START:
       return {

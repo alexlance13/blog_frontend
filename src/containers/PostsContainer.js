@@ -15,16 +15,23 @@ class PostsContainer extends Component {
   render() {
     const { userId, posts, home, loading, admin } = this.props;
     const id = this.props.id || userId;
-    return (
+    const postsForProps = home
+      ? admin
+        ? posts.filter(post => post.approved === null)
+        : posts
+      : posts.filter(post => post.owner._id === id);
+    return posts.length ? (
       <Posts
         onApproveHandle={this.props.onApproveHandle}
         onRemoveHandle={this.props.onRemoveHandle}
         admin={admin}
         loading={loading}
         likeClickHandler={this.likeClickHandler}
-        posts={home ? posts : posts.filter(post => post.owner._id === id)}
+        posts={postsForProps}
         userId={userId}
       />
+    ) : (
+      <h1>It looks like the server is offline</h1>
     );
   }
 }

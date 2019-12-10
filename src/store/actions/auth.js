@@ -1,5 +1,7 @@
 import { SET_USER_INFO, LOG_OUT, SET_USER } from "./types";
 import axios from "../../axios";
+import Swal from "sweetalert2";
+import setErrorText from "../../helpers/setErrorText";
 
 export function loginUser(login, password) {
   return async dispatch => {
@@ -17,8 +19,21 @@ export function loginUser(login, password) {
       const response = await axios.get(`/users/${res.data.userId}`);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch(setUserAction(response.data));
+      Swal.fire({
+        icon: "success",
+        title: "You are successfully logged in",
+        showConfirmButton: false,
+        timer: 2000
+      });
     } catch (e) {
-      console.error("auth error: ", e);
+      let text = setErrorText(e);
+      Swal.fire({
+        icon: "error",
+        title: "Auth error",
+        text,
+        showConfirmButton: true,
+        timer: 6000
+      });
     }
   };
 }
@@ -39,8 +54,21 @@ export function registerUser(login, password) {
       const response = await axios.get(`/users/${res.data.userId}`);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch(setUserAction(response.data));
+      Swal.fire({
+        icon: "success",
+        title: "Registration complete",
+        showConfirmButton: false,
+        timer: 2000
+      });
     } catch (e) {
-      console.error("auth error: ", e);
+      let text = setErrorText(e);
+      Swal.fire({
+        icon: "error",
+        title: "Auth error",
+        text,
+        showConfirmButton: true,
+        timer: 6000
+      });
     }
   };
 }
@@ -58,6 +86,12 @@ export function logOut() {
     localStorage.setItem("user", JSON.stringify({}));
     dispatch(logOutAction());
     dispatch(setUserAction({}));
+    Swal.fire({
+      icon: "success",
+      title: "You are successfully logged out",
+      showConfirmButton: false,
+      timer: 2000
+    });
   };
 }
 

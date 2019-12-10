@@ -7,8 +7,7 @@ class SinglePostContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCommentsOpened: false,
-      isNewCommentPosted: false
+      isCommentsOpened: false
     };
   }
 
@@ -21,14 +20,8 @@ class SinglePostContainer extends Component {
   submitHandler = async commentData => {
     this.props.setComment(this.props.match.params.id, commentData);
     this.setState({
-      isCommentsOpened: true,
-      isNewCommentPosted: true
+      isCommentsOpened: true
     });
-    setTimeout(() => {
-      this.setState({
-        isNewCommentPosted: false
-      });
-    }, 2000);
   };
 
   removeCommentHandler = id => {

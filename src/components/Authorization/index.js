@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Header from "../Header";
 import classes from "./Authorization.module.css";
-import { NavLink } from "react-router-dom";
 
 const Authorization = props => {
   const [login, setLogin] = useState("");
@@ -32,8 +31,7 @@ const Authorization = props => {
           />
         </div>
         <div className={classes.buttons}>
-          <NavLink
-            to="/"
+          <button
             type="button"
             className="btn btn-primary"
             onClick={() => {
@@ -43,9 +41,8 @@ const Authorization = props => {
             }}
           >
             Sign up
-          </NavLink>
-          <NavLink
-            to="/"
+          </button>
+          <button
             type="button"
             className="btn btn-info"
             onClick={() => {
@@ -55,7 +52,7 @@ const Authorization = props => {
             }}
           >
             Log in
-          </NavLink>
+          </button>
         </div>
       </div>
     </div>

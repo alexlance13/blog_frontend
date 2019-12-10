@@ -1,8 +1,9 @@
 import axios from "../../axios";
+import Swal from "sweetalert2";
+import setErrorText from "../../helpers/setErrorText";
 import {
   FETCH_POSTS_START,
   FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_ERROR,
   FETCH_SINGLE_POST_SUCCESS,
   ADD_LIKE,
   REMOVE_LIKE,
@@ -18,8 +19,7 @@ export function fetchPosts() {
       const response = await axios.get("/posts");
       dispatch(fetchPostsSuccess(response.data));
     } catch (e) {
-      console.error("Fetch posts error", e);
-      dispatch(fetchPostsError(e));
+      setErrorText(e, "Fetch posts error");
     }
   };
 }
@@ -37,20 +37,13 @@ export function fetchPostsSuccess(posts) {
   };
 }
 
-export function fetchPostsError(e) {
-  return {
-    type: FETCH_POSTS_ERROR,
-    error: e
-  };
-}
-
 export function fetchSinglePost(id) {
   return async dispatch => {
     try {
       const response = await axios.get(`/posts/${id}`);
       dispatch(fetchSinglePostSuccess(response.data));
-    } catch (error) {
-      console.error("Fetch single post error", error);
+    } catch (e) {
+      setErrorText(e, "Fetch single post error");
     }
   };
 }
@@ -67,8 +60,14 @@ export function setComment(postId, text) {
     try {
       const response = await axios.post("/comments", { text, postId });
       dispatch(addComment(response.data));
+      Swal.fire({
+        icon: "success",
+        title: "Your comment is on check by admin",
+        showConfirmButton: false,
+        timer: 2000
+      });
     } catch (e) {
-      console.error("Sending comment error:", e);
+      setErrorText(e, "Sending comment error");
     }
   };
 }
@@ -86,7 +85,7 @@ export function removeComment(id) {
       const response = await axios.delete(`/comment/${id}`);
       dispatch(removeCommentAction(response.data));
     } catch (e) {
-      console.error("Remove comment error", e);
+      setErrorText(e, "Remove comment error");
     }
   };
 }
@@ -126,8 +125,14 @@ export function updatePost(title, subtitle, text, postId) {
       const params = { title, subtitle, text };
       await axios.put(`/posts/${postId}`, params);
       dispatch(updatePostAction(params));
+      Swal.fire({
+        icon: "success",
+        title: "Your post is on check by admin",
+        showConfirmButton: false,
+        timer: 2000
+      });
     } catch (e) {
-      console.error("Updating post error ", e);
+      setErrorText(e, "Updating post error");
     }
   };
 }
@@ -141,9 +146,16 @@ export function updatePostAction(data) {
 export async function createPost(title, subtitle, text) {
   try {
     const params = { title, subtitle, text };
-    return await axios.post("/posts/", params);
+    const res = await axios.post("/posts/", params);
+    Swal.fire({
+      icon: "success",
+      title: "Your post is on check by admin",
+      showConfirmButton: false,
+      timer: 2000
+    });
+    return res;
   } catch (e) {
-    console.error("Creating post error ", e);
+    setErrorText(e, "Creating post error");
   }
 }
 
@@ -153,7 +165,7 @@ export async function imageUpload(file) {
     data.append("pics", file);
     return await axios.post("/upload", data);
   } catch (e) {
-    console.error("Image uploading error ", e);
+    setErrorText(e, "Image uploading error");
   }
 }
 
@@ -164,7 +176,7 @@ export function approvePost(postId) {
       await axios.put(`/posts/${postId}`, params);
       dispatch(fetchPosts());
     } catch (e) {
-      console.log("post approve error ", e);
+      setErrorText(e, "Post approve error");
     }
   };
 }
@@ -174,8 +186,14 @@ export function removePost(postId) {
     try {
       await axios.delete(`/posts/${postId}`);
       dispatch(fetchPosts());
+      Swal.fire({
+        icon: "success",
+        title: "This post is successfully removed",
+        showConfirmButton: false,
+        timer: 2000
+      });
     } catch (e) {
-      console.log("post approve error ", e);
+      setErrorText(e, "Post remove error");
     }
   };
 }
