@@ -18,6 +18,7 @@ const SinglePost = props => {
         title={props.title || props.post.title}
         setSubtitle={props.setSubtitle}
         setTitle={props.setTitle}
+        onChangeHandler={props.onChangeHandler}
         editing={props.isEditing}
       />
       <div class={cls.join(" ")}>
@@ -27,10 +28,28 @@ const SinglePost = props => {
               token={props.token}
               body={props.isCreating ? " " : props.post.text}
               onChangeHandler={props.onChangeHandler}
+              onBlurHandler={props.onBlurHandler}
             />
-            <button type="button" className="btn btn-success" onClick={() => props.onSave(props.post)}>
+            <ul className={classes.errors}>
+              {props.submited &&
+                Object.values(props.errors).map(
+                  (err, i) =>
+                    err !== false && (
+                      <li key={i} className="alert alert-danger">
+                        {err}
+                      </li>
+                    )
+                )}
+            </ul>
+            <button
+              type="button"
+              className="btn btn-success"
+              // disabled={Object.values(props.errors).filter(value => value !== false).length}
+              onClick={() => props.onSave(props.post)}
+            >
               Save
             </button>
+            {console.log(props.errors)}
           </div>
         ) : (
           <div>

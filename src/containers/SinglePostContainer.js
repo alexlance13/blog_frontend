@@ -41,6 +41,8 @@ class SinglePostContainer extends Component {
   render() {
     return (
       <SinglePost
+        errors={this.props.errors}
+        submited={this.props.submited}
         onChangeHandler={this.props.onChangeHandler}
         onSave={this.props.onSave}
         postId={this.props.postId}

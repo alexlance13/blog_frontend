@@ -24,3 +24,7 @@ p {
   display: block;
   margin: auto;
 }
+.errors {
+  display: grid;
+  grid-template-columns: 1fr;
+}

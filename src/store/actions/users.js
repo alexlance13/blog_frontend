@@ -1,5 +1,6 @@
 import { GET_USER } from "./types";
 import axios from "../../axios";
+import setErrorText from "../../helpers/setErrorText";
 
 export function getUser(id) {
   return async dispatch => {
@@ -7,7 +8,7 @@ export function getUser(id) {
       const res = await axios.get(`/users/${id}`);
       dispatch(getUserAction(res.data));
     } catch (e) {
-      console.error("get user error: ", e);
+      setErrorText(e, "Get user error");
     }
   };
 }

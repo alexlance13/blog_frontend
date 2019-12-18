@@ -26,14 +26,7 @@ export function loginUser(login, password) {
         timer: 2000
       });
     } catch (e) {
-      let text = setErrorText(e);
-      Swal.fire({
-        icon: "error",
-        title: "Auth error",
-        text,
-        showConfirmButton: true,
-        timer: 6000
-      });
+      setErrorText(e, "Auth error");
     }
   };
 }
@@ -61,14 +54,7 @@ export function registerUser(login, password) {
         timer: 2000
       });
     } catch (e) {
-      let text = setErrorText(e);
-      Swal.fire({
-        icon: "error",
-        title: "Auth error",
-        text,
-        showConfirmButton: true,
-        timer: 6000
-      });
+      setErrorText(e, "Auth error");
     }
   };
 }

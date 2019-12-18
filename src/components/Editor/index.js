@@ -24,10 +24,11 @@ const TextEditor = props => {
 
   function onEditorStateChange(editorState) {
     setModel(editorState);
-    props.onChangeHandler(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+    props.onChangeHandler("text", draftToHtml(convertToRaw(editorState.getCurrentContent())));
   }
   return (
     <Editor
+      onBlur={props.onBlurHandler}
       editorState={model}
       toolbar={{
         image: {

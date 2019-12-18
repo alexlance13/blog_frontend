@@ -5,9 +5,9 @@ import classes from "./Toggle.module.css";
 export default function FormControlLabelPosition(props) {
   return (
     <div className={classes.main}>
-      <span>Comments</span>
+      <span>{props.left}</span>
       <Switch disableRipple={true} checked={props.isChecked} onChange={() => props.setIsChecked()} />
-      <span>Posts</span>
+      <span>{props.right}</span>
     </div>
   );
 }

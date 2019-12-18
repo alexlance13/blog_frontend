@@ -43,7 +43,12 @@ class AdminPanel extends Component {
     return (
       <div>
         <Header title="Admin Panel" subtitle="Here you can approve or remove new posts or comments"></Header>
-        <Toggle isChecked={this.state.isChecked} setIsChecked={this.setIsChecked} />
+        <Toggle
+          isChecked={this.state.isChecked}
+          setIsChecked={this.setIsChecked}
+          left="Comment"
+          right="Posts"
+        />
         {this.state.isChecked ? (
           <Posts onApproveHandle={this.onApproveHandle} onRemoveHandle={this.onRemoveHandle} admin={true} />
         ) : (

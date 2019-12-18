@@ -16,3 +16,6 @@ h2 {
   border: 1px solid #ccc !important;
   width: 100% !important;
 }
+.alert-danger {
+  font-size: 6px;
+}

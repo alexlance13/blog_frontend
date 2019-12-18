@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SinglePost from "../../containers/SinglePostContainer";
 import { connect } from "react-redux";
 import { fetchSinglePost, updatePost, createPost } from "../../store/actions/posts";
+import validateAll from "../../helpers/vaildateAll";
 
 class PostEditor extends Component {
   constructor(props) {
@@ -10,7 +11,9 @@ class PostEditor extends Component {
       text: "",
       subtitle: "",
       title: "",
-      isCreating: this.props.match.params.id === "5ded74cb4323972c772c37a9"
+      isCreating: this.props.match.params.id === "5ded74cb4323972c772c37a9",
+      errors: {},
+      submited: false
     };
   }
 
@@ -25,21 +28,13 @@ class PostEditor extends Component {
     });
   }
 
-  onChangeHandler = text => {
+  onChangeHandler = (field, value) => {
     this.setState({
-      text
-    });
-  };
-
-  setSubtitle = e => {
-    this.setState({
-      subtitle: e.target.value || " "
-    });
-  };
-
-  setTitle = e => {
-    this.setState({
-      title: e.target.value || " "
+      [field]: value,
+      errors: {
+        ...this.state.errors,
+        [field]: !validateAll(field, value) && `${field} lenght is not valid`
+      }
     });
   };
 
@@ -53,12 +48,18 @@ class PostEditor extends Component {
   };
 
   onSave = post => {
+    this.setState({
+      submited: true
+    });
+    if (Object.values(this.state.errors).filter(value => value !== false).length) return;
     post._id === "5ded74cb4323972c772c37a9" ? this.createPostHandler() : this.updatePostHandler();
   };
 
   render() {
     return (
       <SinglePost
+        errors={this.state.errors}
+        submited={this.state.submited}
         onSave={this.onSave}
         postId={this.state.postId}
         createPostHandler={this.createPostHandler}
