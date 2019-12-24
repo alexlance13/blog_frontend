@@ -14,11 +14,9 @@
 }
 .main {
   display: grid;
-  grid-template: 1fr / 1fr 50px 40px;
+  grid-template: 1fr / 1fr 60px 60px;
+  padding: 20px;
 }
-/* .main span {
-  justify-self: end;
-} */
 .like span {
   font-weight: 100;
   padding: 0 2px;
@@ -27,7 +25,7 @@
 .comment {
   width: 70px;
   display: grid;
-  grid-template: 1fr / 20px 20px;
+  grid-template: 1fr / 25px 25px;
   justify-items: center;
   align-items: center;
 }
@@ -44,7 +42,6 @@
 }
 @media screen and (max-width: 768px) {
   .main {
-    /* grid-template: 1fr 1fr / 1fr; */
     padding-bottom: 10px;
   }
   .buttons {
@@ -57,7 +54,6 @@
   }
   .postedBy > a {
     padding: 5px;
-    width: auto;
     display: inline !important;
     font-size: 16px;
   }

@@ -4,13 +4,13 @@ import { Route, Redirect } from 'react-router-dom';
 
 class PrivateRoute extends Component {
   render() {
-    const { component: Component, admin, ...rest } = this.props;
+    const { component: Component, admin, user, isLoggedIn, ...rest } = this.props;
     return (
       <Route
         {...rest}
         render={props => {
-          if (admin) return this.props.user.isAdmin ? <Component {...props} /> : <Redirect to="/404" />;
-          return this.props.isLoggedIn ? <Component {...props} /> : <Redirect to="/authorization" />;
+          if (admin) return user.isAdmin ? <Component {...props} /> : <Redirect to="/404" />;
+          return isLoggedIn ? <Component {...props} /> : <Redirect to="/authorization" />;
         }}
       />
     );

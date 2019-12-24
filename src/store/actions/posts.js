@@ -99,17 +99,17 @@ export function removeComment(id) {
   };
 }
 
-function addLike(likeData) {
+function addLike(like) {
   return {
     type: ADD_LIKE,
-    likeData,
+    like,
   };
 }
 
-function removeLike(likeData) {
+function removeLike(like) {
   return {
     type: REMOVE_LIKE,
-    likeData,
+    like,
   };
 }
 

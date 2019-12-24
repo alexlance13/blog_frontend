@@ -9,28 +9,49 @@ import TextEditor from '../Editor';
 import HTMLtoReactParser from '../../helpers/HTMLtoReactParser';
 
 const SinglePost = (props) => {
+  const {
+    isEditing,
+    post,
+    subtitle,
+    title,
+    onChangeHandler,
+    token,
+    isCreating,
+    onBlurHandler,
+    submited,
+    errors,
+    onSave,
+    user,
+    userId,
+    commentClickHandler,
+    likeClickHandler,
+    isCommentsOpened,
+    postRemoveHandler,
+    submitHandler,
+    removeCommentHandler,
+  } = props;
   const cls = [classes.postBody];
-  props.isEditing && cls.push(classes.editing);
-  return props.post.title ? (
+  isEditing && cls.push(classes.editing);
+  return post.title ? (
     <div className={classes.main}>
       <Header
-        subtitle={props.isEditing ? props.subtitle : props.post.subtitle}
-        title={props.isEditing ? props.title : props.post.title}
-        onChangeHandler={props.onChangeHandler}
-        editing={props.isEditing}
+        subtitle={isEditing ? subtitle : post.subtitle}
+        title={isEditing ? title : post.title}
+        onChangeHandler={onChangeHandler}
+        editing={isEditing}
       />
       <div className={cls.join(' ')}>
-        {props.isEditing ? (
+        {isEditing ? (
           <div>
             <TextEditor
-              token={props.token}
-              body={props.isCreating ? ' ' : props.post.text}
-              onChangeHandler={props.onChangeHandler}
-              onBlurHandler={props.onBlurHandler}
+              token={token}
+              body={isCreating ? ' ' : post.text}
+              onChangeHandler={onChangeHandler}
+              onBlurHandler={onBlurHandler}
             />
             <ul className={classes.errors}>
-              {props.submited &&
-                Object.values(props.errors).map(
+              {submited &&
+                Object.values(errors).map(
                   (err, i) =>
                     err !== false && (
                       <li key={i} className="alert alert-danger">
@@ -39,40 +60,40 @@ const SinglePost = (props) => {
                     ),
                 )}
             </ul>
-            <button type="button" className="btn btn-success" onClick={() => props.onSave(props.post)}>
+            <button type="button" className="btn btn-success" onClick={() => onSave(post)}>
               Save
             </button>
           </div>
         ) : (
           <div>
-            <div className={classes.wrap}>{HTMLtoReactParser(props.post.text)}</div>
+            <div className={classes.wrap}>{HTMLtoReactParser(post.text)}</div>
             <PostInfo
-              post={props.post}
-              userId={props.userId}
-              commentClickHandler={props.commentClickHandler}
-              likeClickHandler={props.likeClickHandler}
+              post={post}
+              userId={userId}
+              commentClickHandler={commentClickHandler}
+              likeClickHandler={likeClickHandler}
             />
           </div>
         )}
-        {!props.isEditing && props.isCommentsOpened && (
+        {!isEditing && isCommentsOpened && (
           <Comments
-            removeCommentHandler={props.removeCommentHandler}
-            comments={props.post.comments}
-            userId={props.userId}
-            isAdmin={props.user.isAdmin}
+            removeCommentHandler={removeCommentHandler}
+            comments={post.comments}
+            userId={userId}
+            isAdmin={user.isAdmin}
           />
         )}
-        {!props.isEditing && (props.user.isAdmin || props.post.owner._id === props.userId) && (
+        {!isEditing && (user.isAdmin || post.owner._id === userId) && (
           <div className={classes.buttons}>
-            <NavLink type="button" className="btn btn-success" to={`/post-edit/${props.post._id}`}>
+            <NavLink type="button" className="btn btn-success" to={`/post-edit/${post._id}`}>
               Edit
             </NavLink>
-            <NavLink type="button" className="btn btn-danger" onClick={() => props.postRemoveHandler()} to="/">
+            <NavLink type="button" className="btn btn-danger" onClick={() => postRemoveHandler()} to="/">
               Remove
             </NavLink>
           </div>
         )}
-        {!props.isEditing && <CommentForm submitHandler={props.submitHandler} />}
+        {!isEditing && <CommentForm submitHandler={submitHandler} />}
       </div>
     </div>
   ) : null;

@@ -6,7 +6,6 @@ export default function PostInfoContainer(props) {
     props.likeClickHandler(id, isLiked);
     setIsLiked(!isLiked);
   }
-
   const [isLiked, setIsLiked] = useState(props.post.likes.some(e => e.owner === props.userId));
   return (
     <PostInfo

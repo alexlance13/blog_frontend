@@ -7,7 +7,7 @@
   color: #333333;
 }
 .main a {
-  display: block;
+  display: inline-block;
 }
 .main a:hover,
 .main a:focus,

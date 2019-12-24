@@ -6,14 +6,15 @@ import windowSize from 'react-window-size';
 import useOutsideClick from '../../helpers/useOutsideClick';
 
 const Menu = (props) => {
+  const {windowWidth, isLoggedIn, isAdmin, logOut} = props;
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const ref = useRef();
 
   useEffect(() => {
-    if (props.windowWidth < 768) {
+    if (windowWidth < 768) {
       setIsMenuOpen(false);
     }
-  }, [props.windowWidth]);
+  }, [windowWidth]);
 
   useOutsideClick(ref, () => {
     if (!isMenuOpen) return;
@@ -21,7 +22,7 @@ const Menu = (props) => {
   });
   return (
     <div className={classes.main}>
-      {props.windowWidth < 768 && !isMenuOpen && (
+      {windowWidth < 768 && !isMenuOpen && (
         <button className={classes.burger} onClick={() => setIsMenuOpen(true)}>
           <GiHamburgerMenu />
         </button>
@@ -30,10 +31,10 @@ const Menu = (props) => {
         ref={ref}
         className={classes.links}
         style={
-          props.windowWidth > 768 ? { width: 'auto' } : isMenuOpen ? { width: '200px' } : { width: '0px' }
+          windowWidth > 768 ? { width: 'auto' } : isMenuOpen ? { width: '200px' } : { width: '0px' }
         }
       >
-        {isMenuOpen && props.windowWidth < 768 && (
+        {isMenuOpen && windowWidth < 768 && (
           <li>
             <button className={classes.close} onClick={() => setIsMenuOpen(false)}>
               x
@@ -45,20 +46,20 @@ const Menu = (props) => {
             HOME
           </NavLink>
         </li>
-        {props.isLoggedIn && (
+        {isLoggedIn && (
           <li>
             <NavLink to="/post-edit/5ded74cb4323972c772c37a9">ADD POST</NavLink>
           </li>
         )}
-        {props.isLoggedIn && (
+        {isLoggedIn && (
           <li>
             <NavLink to="/my-posts">MY POSTS</NavLink>
           </li>
         )}
-        <li>{props.isAdmin && <NavLink to="/admin">ADMIN</NavLink>}</li>
+        <li>{isAdmin && <NavLink to="/admin">ADMIN</NavLink>}</li>
         <li>
-          {props.isLoggedIn ? (
-            <NavLink to="/" onClick={() => props.logOut()}>
+          {isLoggedIn ? (
+            <NavLink to="/" onClick={() => logOut()}>
               LOG OUT
             </NavLink>
           ) : (
@@ -69,5 +70,4 @@ const Menu = (props) => {
     </div>
   );
 };
-// }
 export default windowSize(Menu);

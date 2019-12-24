@@ -7,31 +7,32 @@ import { TiTick } from 'react-icons/ti';
 import HTMLtoReactParser from '../../helpers/HTMLtoReactParser';
 
 export default function PostPrev(props) {
+  const {post, admin, onRemoveHandle, onApproveHandle, likeClickHandler, userId} = props;
   const body = (
     <div className={classes.main}>
-      <NavLink to={`/post/${props.post._id}`}>
-        <h1>{props.post.title}</h1>
-        <div className={classes.textWrapper}>{HTMLtoReactParser(props.post.text)}</div>
+      <NavLink to={`/post/${post._id}`}>
+        <h1>{post.title}</h1>
+        <div className={classes.textWrapper}>{HTMLtoReactParser(post.text)}</div>
       </NavLink>
       <PostInfo
         disabled={true}
-        post={props.post}
-        userId={props.userId}
-        likeClickHandler={props.likeClickHandler}
+        post={post}
+        userId={userId}
+        likeClickHandler={likeClickHandler}
       ></PostInfo>
-      {props.admin && (
+      {admin && (
         <div>
           <button
             type="button"
             className="btn btn-danger"
-            onClick={() => props.onRemoveHandle(props.post._id)}
+            onClick={() => onRemoveHandle(post._id)}
           >
             <MdDelete />
           </button>
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => props.onApproveHandle(props.post._id)}
+            onClick={() => onApproveHandle(post._id)}
           >
             <TiTick />
           </button>
@@ -39,6 +40,6 @@ export default function PostPrev(props) {
       )}
     </div>
   );
-  if (props.admin) return !props.post.approved && body;
-  return props.post.approved && body;
+  if (admin) return !post.approved && body;
+  return post.approved && body;
 }

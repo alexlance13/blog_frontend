@@ -5,25 +5,26 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { TiTick } from 'react-icons/ti';
 
 export default function Comments(props) {
+  const {comments, admin: adminPanel, userId, isAdmin, approveCommentHandler, removeCommentHandler,  } = props;
   return (
     <div className={classes.main}>
-      {props.comments.map((comment, i) => {
+      {comments.map((comment, i) => {
         return (
-          ((!props.admin && comment.approved) || (props.admin && !comment.approved)) && (
+          ((!adminPanel && comment.approved) || (adminPanel && !comment.approved)) && (
             <div key={i} className={classes.comment}>
               <NavLink to={`/users/${comment.owner._id}`}>{comment.owner.login} :</NavLink>
               <span>{comment.text}</span>
-              {(comment.owner._id === props.userId || props.admin || props.isAdmin) && (
+              {(comment.owner._id === userId || adminPanel || isAdmin) && (
                 <div className={classes.buttons}>
                   {!comment.approved && (
                     <button
                       className={classes.remove}
-                      onClick={() => props.approveCommentHandler(comment._id)}
+                      onClick={() => approveCommentHandler(comment._id)}
                     >
                       <TiTick />
                     </button>
                   )}
-                  <button className={classes.remove} onClick={() => props.removeCommentHandler(comment._id)}>
+                  <button className={classes.remove} onClick={() => removeCommentHandler(comment._id)}>
                     <AiOutlineDelete />
                   </button>
                 </div>
