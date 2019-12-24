@@ -1,14 +1,14 @@
-import React from "react";
-import "./App.css";
-import { Route, Switch, Redirect } from "react-router-dom";
-import SinglePost from "./containers/SinglePostContainer";
-import Home from "./components/Home";
-import MyPosts from "./components/MyPosts";
-import PostEditor from "./components/PostEditor";
-import Authorization from "./containers/AuthoizationContainer";
-import PrivateRoute from "./components/PrivateRoute";
-import SomeUserPosts from "./components/SomeUserPosts";
-import AdminPanel from "./components/AdminPanel";
+import React from 'react';
+import './App.css';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import SinglePost from './containers/SinglePostContainer';
+import Home from './components/Home';
+import MyPosts from './components/MyPosts';
+import PostEditor from './components/PostEditor';
+import Authorization from './containers/AuthoizationContainer';
+import PrivateRoute from './components/PrivateRoute';
+import SomeUserPosts from './components/SomeUserPosts';
+import AdminPanel from './components/AdminPanel';
 
 function App() {
   return (

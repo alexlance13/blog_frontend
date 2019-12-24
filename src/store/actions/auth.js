@@ -1,12 +1,12 @@
-import { SET_USER_INFO, LOG_OUT, SET_USER } from "./types";
-import axios from "../../axios";
-import Swal from "sweetalert2";
-import setErrorText from "../../helpers/setErrorText";
+import { SET_USER_INFO, LOG_OUT, SET_USER } from './types';
+import axios from '../../axios';
+import Swal from 'sweetalert2';
+import setErrorText from '../../helpers/setErrorText';
 
 export function loginUser(login, password) {
   return async dispatch => {
     try {
-      const res = await axios.post("/login", {
+      const res = await axios.post('/login', {
         login,
         password
       });
@@ -15,18 +15,18 @@ export function loginUser(login, password) {
         token: res.data.token,
         userId: res.data.userId
       };
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
       const response = await axios.get(`/users/${res.data.userId}`);
-      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem('user', JSON.stringify(response.data));
       dispatch(setUserAction(response.data));
       Swal.fire({
-        icon: "success",
-        title: "You are successfully logged in",
+        icon: 'success',
+        title: 'You are successfully logged in',
         showConfirmButton: false,
         timer: 2000
       });
     } catch (e) {
-      setErrorText(e, "Auth error");
+      setErrorText(e, 'Auth error');
     }
   };
 }
@@ -34,7 +34,7 @@ export function loginUser(login, password) {
 export function registerUser(login, password) {
   return async dispatch => {
     try {
-      const res = await axios.post("/register", {
+      const res = await axios.post('/register', {
         login,
         password
       });
@@ -43,18 +43,18 @@ export function registerUser(login, password) {
         token: res.data.token,
         userId: res.data.userId
       };
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
       const response = await axios.get(`/users/${res.data.userId}`);
-      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem('user', JSON.stringify(response.data));
       dispatch(setUserAction(response.data));
       Swal.fire({
-        icon: "success",
-        title: "Registration complete",
+        icon: 'success',
+        title: 'Registration complete',
         showConfirmButton: false,
         timer: 2000
       });
     } catch (e) {
-      setErrorText(e, "Auth error");
+      setErrorText(e, 'Auth error');
     }
   };
 }
@@ -68,13 +68,13 @@ export function setUserInfo(token, userId) {
 
 export function logOut() {
   return dispatch => {
-    localStorage.setItem("userInfo", JSON.stringify({}));
-    localStorage.setItem("user", JSON.stringify({}));
+    localStorage.setItem('userInfo', JSON.stringify({}));
+    localStorage.setItem('user', JSON.stringify({}));
     dispatch(logOutAction());
     dispatch(setUserAction({}));
     Swal.fire({
-      icon: "success",
-      title: "You are successfully logged out",
+      icon: 'success',
+      title: 'You are successfully logged out',
       showConfirmButton: false,
       timer: 2000
     });

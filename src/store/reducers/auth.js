@@ -1,15 +1,15 @@
-import { SET_USER_INFO, LOG_OUT, SET_USER } from "../actions/types";
+import { SET_USER_INFO, LOG_OUT, SET_USER } from '../actions/types';
 
-let userInfo = localStorage.getItem("userInfo");
+let userInfo = localStorage.getItem('userInfo');
 userInfo = JSON.parse(userInfo) || {};
-let user = localStorage.getItem("user");
+let user = localStorage.getItem('user');
 user = JSON.parse(user) || {};
 
 const initialState = {
   userId: userInfo.userId,
   token: userInfo.token,
   isLoggedIn: !!userInfo.token,
-  user
+  user,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -19,19 +19,19 @@ export default function authReducer(state = initialState, action) {
         ...state,
         userId: action.payload.userId,
         token: action.payload.token,
-        isLoggedIn: !!userInfo.token
+        isLoggedIn: !!userInfo.token,
       };
     case LOG_OUT:
       return {
         ...state,
-        userId: "",
-        token: "",
-        isLoggedIn: false
+        userId: '',
+        token: '',
+        isLoggedIn: false,
       };
     case SET_USER:
       return {
         ...state,
-        user: action.user
+        user: action.user,
       };
     default:
       return state;

@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import SinglePost from "../components/SinglePost";
-import { fetchSinglePost, like, removePost, setComment, removeComment } from "../store/actions/posts";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import SinglePost from '../components/SinglePost';
+import { fetchSinglePost, like, removePost, setComment, removeComment } from '../store/actions/posts';
 
 class SinglePostContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCommentsOpened: false
+      isCommentsOpened: false,
     };
   }
 
@@ -17,21 +17,23 @@ class SinglePostContainer extends Component {
       : this.props.fetchSinglePost(this.props.id);
   }
 
-  submitHandler = async commentData => {
-    this.props.setComment(this.props.match.params.id, commentData);
+  submitHandler = async (commentData) => {
+    const res = await this.props.setComment(this.props.match.params.id, commentData);
     this.setState({
-      isCommentsOpened: true
+      isCommentsOpened: true,
     });
+    if (res) setTimeout(() => this.props.history.push('/authorization'), 2000);
   };
 
-  removeCommentHandler = id => {
+  removeCommentHandler = (id) => {
     this.props.removeComment(id);
   };
 
   commentClickHandler = () => this.setState({ isCommentsOpened: !this.state.isCommentsOpened });
 
-  likeClickHandler = (id, isLiked) => {
-    this.props.like(id, isLiked);
+  likeClickHandler = async (id, isLiked) => {
+    const res = await this.props.like(id, isLiked);
+    if (res) setTimeout(() => this.props.history.push('/authorization'), 2000);
   };
 
   postRemoveHandler = () => {
@@ -53,8 +55,6 @@ class SinglePostContainer extends Component {
         updatePostHandler={this.props.updatePostHandler}
         subtitle={this.props.subtitle}
         title={this.props.title}
-        setSubtitle={this.props.setSubtitle}
-        setTitle={this.props.setTitle}
         text={this.props.text}
         isEditing={this.props.isEditing}
         post={this.props.singlePost}
@@ -76,17 +76,17 @@ function mapStateToProps(state) {
     singlePost: state.posts.singlePost,
     userId: state.auth.userId,
     token: state.auth.token,
-    user: state.auth.user
+    user: state.auth.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchSinglePost: id => dispatch(fetchSinglePost(id)),
+    fetchSinglePost: (id) => dispatch(fetchSinglePost(id)),
     like: (postId, isLiked) => dispatch(like(postId, isLiked)),
-    removeComment: id => dispatch(removeComment(id)),
-    removePost: id => dispatch(removePost(id)),
-    setComment: (postId, text) => dispatch(setComment(postId, text))
+    removeComment: (id) => dispatch(removeComment(id)),
+    removePost: (id) => dispatch(removePost(id)),
+    setComment: (postId, text) => dispatch(setComment(postId, text)),
   };
 }
 

@@ -1,14 +1,8 @@
 .navBar {
   align-items: center;
   display: grid;
-  grid-template: 1fr / 250px 1fr 20px;
-}
-ul {
-  display: grid;
-  grid-template: 1fr / auto auto auto auto auto;
-  justify-content: right;
-  padding: 0;
-  margin: 0;
+  grid-template: auto / auto 1fr 20px;
+  padding-top: 10px;
 }
 a {
   padding: 20px;
@@ -18,9 +12,9 @@ a {
   font-weight: 800;
   letter-spacing: 1px;
 }
-li {
-  list-style-type: none;
-}
-.links a {
-  font-size: 12px;
+@media screen and (max-width: 768px) {
+  .navBar {
+    align-items: flex-start;
+    grid-template: 1fr / auto auto 120px;
+  }
 }

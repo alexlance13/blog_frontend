@@ -1,6 +1,6 @@
-import React from "react";
-import Posts from "../../containers/PostsContainer";
-import Header from "../Header";
+import React from 'react';
+import Posts from '../../containers/PostsContainer';
+import Header from '../Header';
 
 const MyPosts = () => {
   return (

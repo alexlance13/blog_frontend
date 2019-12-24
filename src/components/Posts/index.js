@@ -1,8 +1,8 @@
-import React from "react";
-import PostPrev from "../PostPrev";
-import Loader from "../Loader";
-import { NavLink } from "react-router-dom";
-import classes from "./Posts.module.css";
+import React from 'react';
+import PostPrev from '../PostPrev';
+import Loader from '../Loader';
+import { NavLink } from 'react-router-dom';
+import classes from './Posts.module.css';
 
 const Posts = props => {
   return props.loading ? (

@@ -10,3 +10,10 @@
 .shadow-textarea textarea.form-control {
   padding-left: 0.8rem;
 }
+
+@media screen and (max-width: 768px) {
+  .main {
+    grid-template: 1fr 1fr / 1fr;
+    grid-gap: 0;
+  }
+}

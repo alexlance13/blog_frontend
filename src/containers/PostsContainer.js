@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Posts from "../components/Posts";
-import { fetchPosts, like } from "../store/actions/posts";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Posts from '../components/Posts';
+import { fetchPosts, like } from '../store/actions/posts';
 
 class PostsContainer extends Component {
   componentDidMount() {
@@ -17,9 +17,9 @@ class PostsContainer extends Component {
     const id = this.props.id || userId;
     const postsForProps = home
       ? admin
-        ? posts.filter(post => post.approved === null)
+        ? posts.filter((post) => post.approved === null)
         : posts
-      : posts.filter(post => post.owner._id === id);
+      : posts.filter((post) => post.owner._id === id);
     return posts.length ? (
       <Posts
         onApproveHandle={this.props.onApproveHandle}
@@ -41,14 +41,14 @@ function mapStateToProps(state) {
     posts: state.posts.posts,
     loading: state.posts.loading,
     userId: state.auth.userId,
-    user: state.auth.user
+    user: state.auth.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchPosts: () => dispatch(fetchPosts()),
-    like: (postId, isLiked) => dispatch(like(postId, isLiked))
+    like: (postId, isLiked) => dispatch(like(postId, isLiked)),
   };
 }
 

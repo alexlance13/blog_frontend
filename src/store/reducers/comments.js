@@ -1,4 +1,4 @@
-import { GET_COMMENTS, REMOVE_COMMENT, APPROVE_COMMENT } from "../actions/types";
+import { GET_COMMENTS, REMOVE_COMMENT, APPROVE_COMMENT } from '../actions/types';
 
 const initialState = {
   comments: []

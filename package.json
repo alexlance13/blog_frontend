@@ -10,7 +10,7 @@
     "draft-js": "^0.11.2",
     "draftjs-to-html": "^0.8.4",
     "font-awesome": "^4.7.0",
-    "formik": "^2.0.7",
+    "formik": "^2.0.8",
     "html-to-draftjs": "^1.4.0",
     "html-to-react": "^1.4.2",
     "raw-loader": "3",
@@ -23,10 +23,11 @@
     "react-router": "3.0.5",
     "react-router-dom": "^5.1.2",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.3.0",
+    "react-window-size": "^1.2.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "sweetalert2": "^9.5.3",
+    "sweetalert2": "^9.0.0",
     "yup": "^0.27.0"
   },
   "scripts": {
@@ -49,5 +50,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "1.19.1"
   }
 }

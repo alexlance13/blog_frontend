@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import classes from "./CommentForm.module.css";
+import React, { useState } from 'react';
+import classes from './CommentForm.module.css';
 
 export default function CommentForm(props) {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   return (
     <div className={classes.main}>
@@ -13,7 +13,7 @@ export default function CommentForm(props) {
           id="exampleFormControlTextarea6"
           rows="3"
           placeholder="Write your comment here..."
-          onChange={e => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
         ></textarea>
       </div>
       <div className="col-auto">
@@ -22,7 +22,7 @@ export default function CommentForm(props) {
           className="btn btn-primary mb-2"
           onClick={() => {
             props.submitHandler(value);
-            setValue(" ");
+            setValue(' ');
           }}
         >
           Send

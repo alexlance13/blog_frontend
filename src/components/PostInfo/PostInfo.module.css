@@ -14,19 +14,20 @@
 }
 .main {
   display: grid;
-  grid-template: 1fr / 1fr 70px 70px;
+  grid-template: 1fr / 1fr 50px 40px;
 }
-.main span {
+/* .main span {
   justify-self: end;
-}
+} */
 .like span {
   font-weight: 100;
   padding: 0 2px;
 }
-.like {
+.like,
+.comment {
   width: 70px;
   display: grid;
-  grid-template: 1fr / 1fr 1fr;
+  grid-template: 1fr / 20px 20px;
   justify-items: center;
   align-items: center;
 }
@@ -35,14 +36,29 @@
   cursor: pointer;
 }
 .comment {
-  width: 70px;
-  display: grid;
-  grid-template: 1fr / 1fr 1fr;
-  justify-items: center;
-  align-items: center;
   cursor: pointer;
 }
 .picLink {
   color: #333333;
   padding: 0;
+}
+@media screen and (max-width: 768px) {
+  .main {
+    /* grid-template: 1fr 1fr / 1fr; */
+    padding-bottom: 10px;
+  }
+  .buttons {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+  }
+  .postedBy {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .postedBy > a {
+    padding: 5px;
+    width: auto;
+    display: inline !important;
+    font-size: 16px;
+  }
 }

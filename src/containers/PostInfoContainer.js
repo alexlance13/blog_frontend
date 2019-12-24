@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import PostInfo from "../components/PostInfo";
+import React, { useState } from 'react';
+import PostInfo from '../components/PostInfo';
 
 export default function PostInfoContainer(props) {
   async function like(id) {

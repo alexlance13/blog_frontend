@@ -1,41 +1,41 @@
-import React, { Component } from "react";
-import Posts from "../../containers/PostsContainer";
-import Header from "../Header";
-import Toggle from "../Toggle";
-import Comments from "../Comments";
-import { connect } from "react-redux";
-import { approvePost, removePost } from "../../store/actions/posts";
-import { getComments, removeComment, approveComment } from "../../store/actions/comments";
+import React, { Component } from 'react';
+import Posts from '../../containers/PostsContainer';
+import Header from '../Header';
+import Toggle from '../Toggle';
+import Comments from '../Comments';
+import { connect } from 'react-redux';
+import { approvePost, removePost } from '../../store/actions/posts';
+import { getComments, removeComment, approveComment } from '../../store/actions/comments';
 
 class AdminPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isChecked: false
+      isChecked: false,
     };
   }
   componentDidMount() {
     this.props.getComments();
   }
-  onApproveHandle = postId => {
+  onApproveHandle = (postId) => {
     this.props.approvePost(postId);
   };
 
-  onRemoveHandle = postId => {
+  onRemoveHandle = (postId) => {
     this.props.removePost(postId);
   };
 
   setIsChecked = () => {
     this.setState({
-      isChecked: !this.state.isChecked
+      isChecked: !this.state.isChecked,
     });
   };
 
-  removeCommentHandler = id => {
+  removeCommentHandler = (id) => {
     this.props.removeComment(id);
   };
 
-  approveCommentHandler = id => {
+  approveCommentHandler = (id) => {
     this.props.approveComment(id);
   };
 
@@ -43,12 +43,7 @@ class AdminPanel extends Component {
     return (
       <div>
         <Header title="Admin Panel" subtitle="Here you can approve or remove new posts or comments"></Header>
-        <Toggle
-          isChecked={this.state.isChecked}
-          setIsChecked={this.setIsChecked}
-          left="Comment"
-          right="Posts"
-        />
+        <Toggle isChecked={this.state.isChecked} setIsChecked={this.setIsChecked} left="Comment" right="Posts" />
         {this.state.isChecked ? (
           <Posts onApproveHandle={this.onApproveHandle} onRemoveHandle={this.onRemoveHandle} admin={true} />
         ) : (
@@ -67,17 +62,17 @@ class AdminPanel extends Component {
 function mapStateToProps(state) {
   return {
     singlePost: state.posts.singlePost,
-    comments: state.comments.comments
+    comments: state.comments.comments,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    approvePost: postId => dispatch(approvePost(postId)),
-    removePost: postId => dispatch(removePost(postId)),
+    approvePost: (postId) => dispatch(approvePost(postId)),
+    removePost: (postId) => dispatch(removePost(postId)),
     getComments: () => dispatch(getComments()),
-    removeComment: id => dispatch(removeComment(id)),
-    approveComment: id => dispatch(approveComment(id))
+    removeComment: (id) => dispatch(removeComment(id)),
+    approveComment: (id) => dispatch(approveComment(id)),
   };
 }
 

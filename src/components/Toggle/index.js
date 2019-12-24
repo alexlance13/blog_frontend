@@ -1,6 +1,6 @@
-import React from "react";
-import Switch from "@material-ui/core/Switch";
-import classes from "./Toggle.module.css";
+import React from 'react';
+import Switch from '@material-ui/core/Switch';
+import classes from './Toggle.module.css';
 
 export default function FormControlLabelPosition(props) {
   return (

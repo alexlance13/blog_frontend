@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import SinglePost from "../../containers/SinglePostContainer";
-import { connect } from "react-redux";
-import { fetchSinglePost, updatePost, createPost } from "../../store/actions/posts";
-import validateAll from "../../helpers/vaildateAll";
+import React, { Component } from 'react';
+import SinglePost from '../../containers/SinglePostContainer';
+import { connect } from 'react-redux';
+import { fetchSinglePost, updatePost, createPost } from '../../store/actions/posts';
+import validateAll from '../../helpers/vaildateAll';
 
 class PostEditor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      subtitle: "",
-      title: "",
-      isCreating: this.props.match.params.id === "5ded74cb4323972c772c37a9",
+      text: '',
+      subtitle: '',
+      title: '',
+      isCreating: this.props.match.params.id === '5ded74cb4323972c772c37a9',
       errors: {},
-      submited: false
+      submited: false,
     };
   }
 
@@ -22,9 +22,9 @@ class PostEditor extends Component {
       ? await this.props.fetchSinglePost(this.props.match.params.id)
       : await this.props.fetchSinglePost(this.props.id);
     this.setState({
-      text: this.state.isCreating ? " " : this.props.singlePost.text,
+      text: this.state.isCreating ? ' ' : this.props.singlePost.text,
       subtitle: this.props.singlePost.subtitle,
-      title: this.props.singlePost.title
+      title: this.props.singlePost.title,
     });
   }
 
@@ -33,26 +33,35 @@ class PostEditor extends Component {
       [field]: value,
       errors: {
         ...this.state.errors,
-        [field]: !validateAll(field, value) && `${field} lenght is not valid`
-      }
+        [field]: !validateAll(field, value) && `${field} lenght is not valid`,
+      },
     });
   };
 
   updatePostHandler = () => {
-    this.props.updatePost(this.state.title, this.state.subtitle, this.state.text, this.props.singlePost._id);
+    this.props.updatePost(
+      this.state.title,
+      this.state.subtitle,
+      this.state.text.replace(/<(?<tag>.*?)[^>]*>((\s*?)|(<\/?[^>]*>)|(&[^;]*;))<\/\k<tag>>/gi, ''),
+      this.props.singlePost._id,
+    );
     this.props.history.push(`/post/${this.props.singlePost._id}`);
   };
   createPostHandler = async () => {
-    const res = await createPost(this.state.title, this.state.subtitle, this.state.text);
+    const res = await createPost(
+      this.state.title,
+      this.state.subtitle,
+      this.state.text.replace(/<(?<tag>.*?)[^>]*>((\s*?)|(<\/?[^>]*>)|(&[^;]*;))<\/\k<tag>>/gi, ''),
+    );
     this.props.history.push(`/post/${res.data._id}`);
   };
 
-  onSave = post => {
+  onSave = (post) => {
     this.setState({
-      submited: true
+      submited: true,
     });
-    if (Object.values(this.state.errors).filter(value => value !== false).length) return;
-    post._id === "5ded74cb4323972c772c37a9" ? this.createPostHandler() : this.updatePostHandler();
+    if (Object.values(this.state.errors).filter((value) => value !== false).length) return;
+    post._id === '5ded74cb4323972c772c37a9' ? this.createPostHandler() : this.updatePostHandler();
   };
 
   render() {
@@ -80,14 +89,14 @@ class PostEditor extends Component {
 
 function mapStateToProps(state) {
   return {
-    singlePost: state.posts.singlePost
+    singlePost: state.posts.singlePost,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchSinglePost: id => dispatch(fetchSinglePost(id)),
-    updatePost: (title, subtitle, text, postId) => dispatch(updatePost(title, subtitle, text, postId))
+    fetchSinglePost: (id) => dispatch(fetchSinglePost(id)),
+    updatePost: (title, subtitle, text, postId) => dispatch(updatePost(title, subtitle, text, postId)),
   };
 }
 

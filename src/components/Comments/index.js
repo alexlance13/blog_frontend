@@ -1,8 +1,8 @@
-import React from "react";
-import classes from "./Comments.module.css";
-import { NavLink } from "react-router-dom";
-import { AiOutlineDelete } from "react-icons/ai";
-import { TiTick } from "react-icons/ti";
+import React from 'react';
+import classes from './Comments.module.css';
+import { NavLink } from 'react-router-dom';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { TiTick } from 'react-icons/ti';
 
 export default function Comments(props) {
   return (

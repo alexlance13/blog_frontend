@@ -6,6 +6,9 @@
   font-weight: 100;
   color: #333333;
 }
+.main a {
+  display: block;
+}
 .main a:hover,
 .main a:focus,
 .textWrapper:hover,
@@ -21,4 +24,23 @@ h1 {
   font-size: 20px;
   overflow: hidden;
   max-height: 350px;
+  position: relative;
+}
+.textWrapper img {
+  width: 100% !important;
+}
+@media screen and (max-width: 768px) {
+  .textWrapper {
+    padding: 0;
+  }
+  .textWrapper h1 {
+    font-size: 30px !important;
+  }
+  .main > a {
+    padding: 0;
+  }
+  .main {
+    margin-top: 30px;
+    width: 85%;
+  }
 }

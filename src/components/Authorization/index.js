@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import Header from "../Header";
-import classes from "./Authorization.module.css";
-import { Formik, Form, Field } from "formik";
-import Toggle from "../Toggle";
+import React, { useState } from 'react';
+import Header from '../Header';
+import classes from './Authorization.module.css';
+import { Formik, Form, Field } from 'formik';
+import Toggle from '../Toggle';
 
-const Authorization = props => {
+const Authorization = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <div>
@@ -18,11 +18,11 @@ const Authorization = props => {
       <div className={classes.auth}>
         <Formik
           initialValues={{
-            login: "",
-            password: ""
+            login: '',
+            password: '',
           }}
           validationSchema={props.signupSchema}
-          onSubmit={values => {
+          onSubmit={(values) => {
             isChecked ? props.registerButtonHandler(values) : props.loginButtonHandler(values);
           }}
           isValid={false}

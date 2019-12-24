@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import classes from "./NavBar.module.css";
-import { connect } from "react-redux";
-import { logOut } from "../../store/actions/auth";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import classes from './NavBar.module.css';
+import { connect } from 'react-redux';
+import { logOut } from '../../store/actions/auth';
+import Menu from '../Menu';
 
 class NavBar extends Component {
   render() {
@@ -14,33 +15,11 @@ class NavBar extends Component {
               Your diary
             </NavLink>
           </div>
-          <ul className={classes.links}>
-            <li>
-              <NavLink exact to="/">
-                HOME
-              </NavLink>
-            </li>
-            {this.props.isLoggedIn && (
-              <li>
-                <NavLink to="/post-edit/5ded74cb4323972c772c37a9">ADD POST</NavLink>
-              </li>
-            )}
-            {this.props.isLoggedIn && (
-              <li>
-                <NavLink to="/my-posts">MY POSTS</NavLink>
-              </li>
-            )}
-            <li>{this.props.user.isAdmin && <NavLink to="/admin">ADMIN</NavLink>}</li>
-            <li>
-              {this.props.isLoggedIn ? (
-                <NavLink to="/" onClick={() => this.props.logOut()}>
-                  LOG OUT
-                </NavLink>
-              ) : (
-                <NavLink to="/authorization">AUTHORIZATION</NavLink>
-              )}
-            </li>
-          </ul>
+          <Menu
+            isAdmin={this.props.user.isAdmin}
+            isLoggedIn={this.props.isLoggedIn}
+            logOut={this.props.logOut}
+          />
         </nav>
       </div>
     );
@@ -50,13 +29,13 @@ class NavBar extends Component {
 function mapStateToProps(state) {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    user: state.auth.user
+    user: state.auth.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    logOut: () => dispatch(logOut())
+    logOut: () => dispatch(logOut()),
   };
 }
 

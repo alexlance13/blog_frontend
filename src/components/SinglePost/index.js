@@ -1,32 +1,30 @@
-import React from "react";
-import classes from "./SinglePost.module.css";
-import Comments from "../Comments";
-import Header from "../Header";
-import PostInfo from "../../containers/PostInfoContainer";
-import CommentForm from "../CommentForm";
-import { NavLink } from "react-router-dom";
-import TextEditor from "../Editor";
-import HTMLtoReactParser from "../../helpers/HTMLtoReactParser";
+import React from 'react';
+import classes from './SinglePost.module.css';
+import Comments from '../Comments';
+import Header from '../Header';
+import PostInfo from '../../containers/PostInfoContainer';
+import CommentForm from '../CommentForm';
+import { NavLink } from 'react-router-dom';
+import TextEditor from '../Editor';
+import HTMLtoReactParser from '../../helpers/HTMLtoReactParser';
 
-const SinglePost = props => {
+const SinglePost = (props) => {
   const cls = [classes.postBody];
   props.isEditing && cls.push(classes.editing);
   return props.post.title ? (
     <div className={classes.main}>
       <Header
-        subtitle={props.subtitle || props.post.subtitle}
-        title={props.title || props.post.title}
-        setSubtitle={props.setSubtitle}
-        setTitle={props.setTitle}
+        subtitle={props.isEditing ? props.subtitle : props.post.subtitle}
+        title={props.isEditing ? props.title : props.post.title}
         onChangeHandler={props.onChangeHandler}
         editing={props.isEditing}
       />
-      <div class={cls.join(" ")}>
+      <div className={cls.join(' ')}>
         {props.isEditing ? (
           <div>
             <TextEditor
               token={props.token}
-              body={props.isCreating ? " " : props.post.text}
+              body={props.isCreating ? ' ' : props.post.text}
               onChangeHandler={props.onChangeHandler}
               onBlurHandler={props.onBlurHandler}
             />
@@ -38,18 +36,12 @@ const SinglePost = props => {
                       <li key={i} className="alert alert-danger">
                         {err}
                       </li>
-                    )
+                    ),
                 )}
             </ul>
-            <button
-              type="button"
-              className="btn btn-success"
-              // disabled={Object.values(props.errors).filter(value => value !== false).length}
-              onClick={() => props.onSave(props.post)}
-            >
+            <button type="button" className="btn btn-success" onClick={() => props.onSave(props.post)}>
               Save
             </button>
-            {console.log(props.errors)}
           </div>
         ) : (
           <div>
@@ -75,12 +67,7 @@ const SinglePost = props => {
             <NavLink type="button" className="btn btn-success" to={`/post-edit/${props.post._id}`}>
               Edit
             </NavLink>
-            <NavLink
-              type="button"
-              className="btn btn-danger"
-              onClick={() => props.postRemoveHandler()}
-              to="/"
-            >
+            <NavLink type="button" className="btn btn-danger" onClick={() => props.postRemoveHandler()} to="/">
               Remove
             </NavLink>
           </div>

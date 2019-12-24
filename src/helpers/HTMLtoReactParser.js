@@ -1,4 +1,4 @@
-import HtmlToReact from "html-to-react";
+import HtmlToReact from 'html-to-react';
 
 export default function parser(htmlInput) {
   const HtmlToReactParser = HtmlToReact.Parser;

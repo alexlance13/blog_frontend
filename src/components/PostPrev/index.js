@@ -1,10 +1,10 @@
-import React from "react";
-import classes from "./PostPrev.module.css";
-import { NavLink } from "react-router-dom";
-import PostInfo from "../../containers/PostInfoContainer";
-import { MdDelete } from "react-icons/md";
-import { TiTick } from "react-icons/ti";
-import HTMLtoReactParser from "../../helpers/HTMLtoReactParser";
+import React from 'react';
+import classes from './PostPrev.module.css';
+import { NavLink } from 'react-router-dom';
+import PostInfo from '../../containers/PostInfoContainer';
+import { MdDelete } from 'react-icons/md';
+import { TiTick } from 'react-icons/ti';
+import HTMLtoReactParser from '../../helpers/HTMLtoReactParser';
 
 export default function PostPrev(props) {
   const body = (

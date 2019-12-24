@@ -1,6 +1,10 @@
-.wrapperClassName {
-}
 .editorClassName {
   border: 1px solid #f1f1f1;
   margin: 10px 0;
+}
+@media screen and (max-width: 768px) {
+  .editorClassName .rdw-image-modal {
+    position: static !important;
+    width: auto !important;
+  }
 }

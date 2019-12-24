@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import Posts from "../../containers/PostsContainer";
-import Header from "../Header";
-import { connect } from "react-redux";
-import { getUser } from "../../store/actions/users";
+import React, { Component } from 'react';
+import Posts from '../../containers/PostsContainer';
+import Header from '../Header';
+import { connect } from 'react-redux';
+import { getUser } from '../../store/actions/users';
 
 class SomeUserPosts extends Component {
   componentDidMount() {

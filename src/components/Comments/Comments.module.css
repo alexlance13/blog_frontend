@@ -12,6 +12,7 @@
 .remove {
   border: none;
   outline: none;
+  background: none;
 }
 .remove:active {
   outline: none;

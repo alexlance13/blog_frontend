@@ -9,7 +9,7 @@ import {
   ADD_LIKE,
   REMOVE_LIKE,
   UPDATE_POST
-} from "../actions/types";
+} from '../actions/types';
 
 const initialState = {
   posts: [],
