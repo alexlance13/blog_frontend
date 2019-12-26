@@ -7,7 +7,7 @@ import { FaRegComment } from 'react-icons/fa';
 import dateFormatter from '../../helpers/dateFormatter';
 
 const PostInfo = (props) => {
-  const {disabled, commentClickHandler, isLiked, post, like} = props;
+  const { disabled, commentClickHandler, isLiked, post, likeClickHandler } = props;
   function crutch(string) {
     switch (string) {
       case 'comment':
@@ -42,7 +42,7 @@ const PostInfo = (props) => {
           return (
             <div
               onClick={() => {
-                like(post._id);
+                likeClickHandler(post._id);
               }}
             >
               <FaHeart />
@@ -52,7 +52,7 @@ const PostInfo = (props) => {
         return (
           <div
             onClick={() => {
-              like(post._id);
+              likeClickHandler(post._id);
             }}
           >
             <FaRegHeart />
@@ -66,11 +66,8 @@ const PostInfo = (props) => {
     <div className={classes.main}>
       <p className={classes.postedBy}>
         Posted by <NavLink to={`/user-posts/${post.owner._id}`}>{post.owner.login}</NavLink>{' '}
-        {post.updatedAt && post.created_at.slice(0, 16) !== post.updatedAt.slice(0, 16)
-          ? 'updated '
-          : ''}
-        at{' '}
-        {post.updatedTime ? dateFormatter(post.updatedAt) : dateFormatter(post.created_at)}
+        {post.updatedAt && post.created_at.slice(0, 16) !== post.updatedAt.slice(0, 16) ? 'updated ' : ''}
+        at {post.updatedTime ? dateFormatter(post.updatedAt) : dateFormatter(post.created_at)}
       </p>
       <span className={classes.comment}>
         <span>{post.comments.filter((comment) => comment.approved).length}</span> {crutch('comment')}

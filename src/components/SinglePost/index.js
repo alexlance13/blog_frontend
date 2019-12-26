@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './SinglePost.module.css';
-import Comments from '../Comments';
+import Comments from '../../containers/CommentsContainer';
 import Header from '../Header';
 import PostInfo from '../../containers/PostInfoContainer';
 import CommentForm from '../CommentForm';
@@ -17,18 +17,15 @@ const SinglePost = (props) => {
     onChangeHandler,
     token,
     isCreating,
-    onBlurHandler,
     submited,
     errors,
     onSave,
     user,
     userId,
     commentClickHandler,
-    likeClickHandler,
     isCommentsOpened,
     postRemoveHandler,
     submitHandler,
-    removeCommentHandler,
   } = props;
   const cls = [classes.postBody];
   isEditing && cls.push(classes.editing);
@@ -43,12 +40,7 @@ const SinglePost = (props) => {
       <div className={cls.join(' ')}>
         {isEditing ? (
           <div>
-            <TextEditor
-              token={token}
-              body={isCreating ? ' ' : post.text}
-              onChangeHandler={onChangeHandler}
-              onBlurHandler={onBlurHandler}
-            />
+            <TextEditor token={token} body={isCreating ? ' ' : post.text} onChangeHandler={onChangeHandler} />
             <ul className={classes.errors}>
               {submited &&
                 Object.values(errors).map(
@@ -67,22 +59,10 @@ const SinglePost = (props) => {
         ) : (
           <div>
             <div className={classes.wrap}>{HTMLtoReactParser(post.text)}</div>
-            <PostInfo
-              post={post}
-              userId={userId}
-              commentClickHandler={commentClickHandler}
-              likeClickHandler={likeClickHandler}
-            />
+            <PostInfo post={post} userId={userId} commentClickHandler={commentClickHandler} />
           </div>
         )}
-        {!isEditing && isCommentsOpened && (
-          <Comments
-            removeCommentHandler={removeCommentHandler}
-            comments={post.comments}
-            userId={userId}
-            isAdmin={user.isAdmin}
-          />
-        )}
+        {!isEditing && isCommentsOpened && <Comments />}
         {!isEditing && (user.isAdmin || post.owner._id === userId) && (
           <div className={classes.buttons}>
             <NavLink type="button" className="btn btn-success" to={`/post-edit/${post._id}`}>

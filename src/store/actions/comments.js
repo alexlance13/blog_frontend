@@ -9,7 +9,7 @@ export function getCommentsAction(comments) {
 }
 
 export function getComments() {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const res = await axios.get('/comments');
       dispatch(getCommentsAction(res.data));
@@ -26,8 +26,8 @@ export function removeCommentAction(id) {
   };
 }
 
-export function removeComment(id) {
-  return async dispatch => {
+export function removeCommentFromAdminHandler(id) {
+  return async (dispatch) => {
     try {
       await axios.delete(`/comment/${id}`);
       dispatch(removeCommentAction(id));
@@ -45,7 +45,7 @@ export function approveCommentAction(id) {
 }
 
 export function approveComment(id) {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       await axios.put(`/comment/${id}`, {});
       dispatch(approveCommentAction(id));

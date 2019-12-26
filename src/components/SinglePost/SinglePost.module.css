@@ -22,6 +22,8 @@ p {
 .wrap img {
   display: block;
   margin: auto;
+  padding: 15px 0;
+  max-height: 500px;
 }
 .errors {
   display: grid;

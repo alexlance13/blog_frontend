@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SinglePost from '../components/SinglePost';
-import { fetchSinglePost, like, removePost, setComment, removeComment } from '../store/actions/posts';
+import { fetchSinglePost, removePost, setComment } from '../store/actions/posts';
 
 class SinglePostContainer extends Component {
   constructor(props) {
@@ -25,16 +25,7 @@ class SinglePostContainer extends Component {
     if (res) setTimeout(() => this.props.history.push('/authorization'), 2000);
   };
 
-  removeCommentHandler = (id) => {
-    this.props.removeComment(id);
-  };
-
   commentClickHandler = () => this.setState({ isCommentsOpened: !this.state.isCommentsOpened });
-
-  likeClickHandler = async (id, isLiked) => {
-    const res = await this.props.like(id, isLiked);
-    if (res) setTimeout(() => this.props.history.push('/authorization'), 2000);
-  };
 
   postRemoveHandler = () => {
     this.props.removePost(this.props.singlePost._id);
@@ -83,8 +74,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchSinglePost: (id) => dispatch(fetchSinglePost(id)),
-    like: (postId, isLiked) => dispatch(like(postId, isLiked)),
-    removeComment: (id) => dispatch(removeComment(id)),
     removePost: (id) => dispatch(removePost(id)),
     setComment: (postId, text) => dispatch(setComment(postId, text)),
   };

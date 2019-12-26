@@ -811,6 +811,10 @@
 .rdw-image-imagewrapper {
   position: relative;
 }
+
+.rdw-image-imagewrapper img {
+  max-height: 500px;
+}
 .rdw-image-center {
   display: flex;
   justify-content: center;
@@ -893,7 +897,7 @@
   height: inherit;
   text-align: initial;
 }
-.public-DraftEditor-content[contenteditable="true"] {
+.public-DraftEditor-content[contenteditable='true'] {
   -webkit-user-modify: read-write-plaintext-only;
 }
 .DraftEditor-root {
@@ -1021,23 +1025,23 @@
   width: 30px;
 }
 .public-DraftStyleDefault-orderedListItem:before {
-  content: counter(ol0) ". ";
+  content: counter(ol0) '. ';
   counter-increment: ol0;
 }
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before {
-  content: counter(ol1) ". ";
+  content: counter(ol1) '. ';
   counter-increment: ol1;
 }
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before {
-  content: counter(ol2) ". ";
+  content: counter(ol2) '. ';
   counter-increment: ol2;
 }
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before {
-  content: counter(ol3) ". ";
+  content: counter(ol3) '. ';
   counter-increment: ol3;
 }
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before {
-  content: counter(ol4) ". ";
+  content: counter(ol4) '. ';
   counter-increment: ol4;
 }
 .public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset {

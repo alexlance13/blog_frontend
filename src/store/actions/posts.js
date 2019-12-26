@@ -88,7 +88,7 @@ function removeCommentAction(comment) {
   };
 }
 
-export function removeComment(id) {
+export function removeCommentFromSinglePostHandler(id) {
   return async (dispatch) => {
     try {
       const response = await axios.delete(`/comment/${id}`);

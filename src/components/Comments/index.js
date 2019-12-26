@@ -5,7 +5,8 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { TiTick } from 'react-icons/ti';
 
 export default function Comments(props) {
-  const {comments, admin: adminPanel, userId, isAdmin, approveCommentHandler, removeCommentHandler,  } = props;
+  const { comments, adminPanel, userId, isAdmin, approveCommentHandler, removeCommentHandler } = props;
+
   return (
     <div className={classes.main}>
       {comments.map((comment, i) => {
@@ -17,10 +18,7 @@ export default function Comments(props) {
               {(comment.owner._id === userId || adminPanel || isAdmin) && (
                 <div className={classes.buttons}>
                   {!comment.approved && (
-                    <button
-                      className={classes.remove}
-                      onClick={() => approveCommentHandler(comment._id)}
-                    >
+                    <button className={classes.remove} onClick={() => approveCommentHandler(comment._id)}>
                       <TiTick />
                     </button>
                   )}
