@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const options = {
-  baseURL: 'http://localhost:3333/'
+  baseURL: process.env.SERVER_URL,
 };
 const instance = axios.create(options);
 
