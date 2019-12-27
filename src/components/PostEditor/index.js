@@ -11,7 +11,7 @@ class PostEditor extends Component {
       text: '',
       subtitle: '',
       title: '',
-      isCreating: this.props.match.params.id === '5ded74cb4323972c772c37a9',
+      isCreating: this.props.match.params.id === '5e0526de89356800044df417',
       errors: {},
       submited: false,
     };
@@ -61,7 +61,7 @@ class PostEditor extends Component {
       submited: true,
     });
     if (Object.values(this.state.errors).filter((value) => value !== false).length) return;
-    post._id === '5ded74cb4323972c772c37a9' ? this.createPostHandler() : this.updatePostHandler();
+    post._id === '5e0526de89356800044df417' ? this.createPostHandler() : this.updatePostHandler();
   };
 
   render() {

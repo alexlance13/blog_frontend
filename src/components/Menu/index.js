@@ -6,7 +6,7 @@ import windowSize from 'react-window-size';
 import useOutsideClick from '../../helpers/useOutsideClick';
 
 const Menu = (props) => {
-  const {windowWidth, isLoggedIn, isAdmin, logOut} = props;
+  const { windowWidth, isLoggedIn, isAdmin, logOut } = props;
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const ref = useRef();
 
@@ -30,9 +30,7 @@ const Menu = (props) => {
       <ul
         ref={ref}
         className={classes.links}
-        style={
-          windowWidth > 768 ? { width: 'auto' } : isMenuOpen ? { width: '200px' } : { width: '0px' }
-        }
+        style={windowWidth > 768 ? { width: 'auto' } : isMenuOpen ? { width: '200px' } : { width: '0px' }}
       >
         {isMenuOpen && windowWidth < 768 && (
           <li>
@@ -48,7 +46,7 @@ const Menu = (props) => {
         </li>
         {isLoggedIn && (
           <li>
-            <NavLink to="/post-edit/5ded74cb4323972c772c37a9">ADD POST</NavLink>
+            <NavLink to="/post-edit/5e0526de89356800044df417">ADD POST</NavLink>
           </li>
         )}
         {isLoggedIn && (
