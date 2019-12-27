@@ -4,7 +4,7 @@ require('dotenv').config();
 console.log(process.env.REACT_APP_API_URL);
 
 export const options = {
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: 'https://tranquil-scrubland-33017.herokuapp.com',
 };
 const instance = axios.create(options);
 
