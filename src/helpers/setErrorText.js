@@ -14,12 +14,12 @@ export default function setErrorText(e, title) {
         text = 'Something went wrong';
         break;
     }
-  }
-  Swal.fire({
-    icon: 'error',
-    title,
-    text,
-    showConfirmButton: true,
-    timer: 6000
-  });
+    Swal.fire({
+      icon: 'error',
+      title,
+      text,
+      showConfirmButton: true,
+      timer: 6000,
+    });
+  } else console.log(e);
 }
