@@ -25,7 +25,7 @@ const Posts = (props) => {
         <div className={classes.noPost}>
           <h1>You have no published posts yet</h1>
           <hr />
-          <NavLink type="button" className="btn btn-primary" to="/post-edit/5e0526de89356800044df417">
+          <NavLink type="button" className="btn btn-primary" to="/post-edit/5e078a17a004ad000439a5ea">
             ADD POST
           </NavLink>
         </div>

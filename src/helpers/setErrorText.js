@@ -21,5 +21,5 @@ export default function setErrorText(e, title) {
       showConfirmButton: true,
       timer: 6000,
     });
-  } else console.log(e);
+  } else console.error(e);
 }
