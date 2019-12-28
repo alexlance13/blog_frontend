@@ -29,6 +29,9 @@ h1 {
 .textWrapper img {
   width: 100% !important;
 }
+.textWrapper img:hover {
+  cursor: default;
+}
 @media screen and (max-width: 768px) {
   .textWrapper {
     padding: 0;

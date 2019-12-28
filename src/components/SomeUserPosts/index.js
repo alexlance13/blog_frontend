@@ -15,7 +15,8 @@ class SomeUserPosts extends Component {
         <Header
           title={`Posts maded by ${this.props.user.login}`}
           subtitle={`Here you can see ${this.props.user.login}'s posts`}
-        ></Header>
+          loading={this.props.loading}
+        />
         <Posts id={this.props.match.params.id} />
       </div>
     );
@@ -24,13 +25,14 @@ class SomeUserPosts extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.users.user
+    user: state.users.user,
+    loading: state.posts.loading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getUser: id => dispatch(getUser(id))
+    getUser: (id) => dispatch(getUser(id)),
   };
 }
 

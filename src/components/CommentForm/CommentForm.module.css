@@ -11,6 +11,10 @@
   padding-left: 0.8rem;
 }
 
+textarea {
+  resize: none;
+}
+
 @media screen and (max-width: 768px) {
   .main {
     grid-template: 1fr 1fr / 1fr;

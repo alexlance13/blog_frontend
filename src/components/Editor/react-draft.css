@@ -88,7 +88,7 @@
   overflow-y: scroll;
 }
 .rdw-dropdown-optionwrapper {
-  grid-template: repeat(5, 1fr) / 1fr;
+  grid-template: 1fr / 1fr;
 }
 .rdw-dropdown-optionwrapper:hover {
   box-shadow: 1px 1px 0px #bfbdbd;
