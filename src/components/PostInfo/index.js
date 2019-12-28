@@ -7,7 +7,7 @@ import { FaRegComment } from 'react-icons/fa';
 import dateFormatter from '../../helpers/dateFormatter';
 
 const PostInfo = (props) => {
-  const { disabled, commentClickHandler, isLiked, post, likeClickHandler } = props;
+  const { disabled, commentClickHandler, isLiked, post, likeClickHandler, ping } = props;
   function crutch(string) {
     switch (string) {
       case 'comment':
@@ -42,6 +42,7 @@ const PostInfo = (props) => {
           return (
             <div
               onClick={() => {
+                if (ping) return;
                 likeClickHandler(post._id);
               }}
             >
@@ -52,6 +53,7 @@ const PostInfo = (props) => {
         return (
           <div
             onClick={() => {
+              if (ping) return;
               likeClickHandler(post._id);
             }}
           >

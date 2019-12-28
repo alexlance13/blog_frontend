@@ -34,6 +34,7 @@ class SinglePostContainer extends Component {
   render() {
     return (
       <SinglePost
+        history={this.props.history}
         errors={this.props.errors}
         submited={this.props.submited}
         onChangeHandler={this.props.onChangeHandler}

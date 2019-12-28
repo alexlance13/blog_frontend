@@ -20,7 +20,7 @@ class PostsContainer extends Component {
         ? posts.filter((post) => post.approved === null)
         : posts
       : posts.filter((post) => post.owner._id === id);
-    return posts.length ? (
+    return posts ? (
       <Posts
         onApproveHandle={this.props.onApproveHandle}
         onRemoveHandle={this.props.onRemoveHandle}

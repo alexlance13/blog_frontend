@@ -174,7 +174,7 @@ export async function imageUpload(file) {
     data.append('pics', file);
     return await axios.post('/upload', data);
   } catch (e) {
-    setErrorText(e, 'Image uploading error');
+    setErrorText(e, 'Upload image error');
   }
 }
 

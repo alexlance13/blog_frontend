@@ -26,6 +26,7 @@ const SinglePost = (props) => {
     isCommentsOpened,
     postRemoveHandler,
     submitHandler,
+    history,
   } = props;
   const cls = [classes.postBody];
   isEditing && cls.push(classes.editing);
@@ -59,7 +60,12 @@ const SinglePost = (props) => {
         ) : (
           <div>
             <div className={classes.wrap}>{HTMLtoReactParser(post.text)}</div>
-            <PostInfo post={post} userId={userId} commentClickHandler={commentClickHandler} />
+            <PostInfo
+              history={history}
+              post={post}
+              userId={userId}
+              commentClickHandler={commentClickHandler}
+            />
           </div>
         )}
         {!isEditing && isCommentsOpened && <Comments />}
