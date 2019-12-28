@@ -46,7 +46,7 @@ const Menu = (props) => {
         </li>
         {isLoggedIn && (
           <li>
-            <NavLink to="/post-edit/5e0526de89356800044df417">ADD POST</NavLink>
+            <NavLink to="/post-edit/5e078a17a004ad000439a5ea">ADD POST</NavLink>
           </li>
         )}
         {isLoggedIn && (
