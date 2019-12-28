@@ -15,8 +15,8 @@ const composeEnhancers =
 
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
-if (!localStorage.getItem('user')) localStorage.setItem('user', {});
-if (!localStorage.getItem('userInfo')) localStorage.setItem('userInfo', {});
+if (!localStorage.getItem('user')) localStorage.setItem('user', '{}');
+if (!localStorage.getItem('userInfo')) localStorage.setItem('userInfo', '{}');
 
 ReactDOM.render(
   <Provider store={store}>
