@@ -9,7 +9,7 @@ const Posts = (props) => {
     <Loader />
   ) : (
     <div>
-      {props.posts.filter((post) => post.approved !== null).length ? (
+      {props.posts ? (
         props.posts.map((post, i) => (
           <PostPrev
             onApproveHandle={props.onApproveHandle}

@@ -15,11 +15,10 @@ class PostsContainer extends Component {
   render() {
     const { userId, posts, home, loading, admin } = this.props;
     const id = this.props.id || userId;
-    const postsForProps = home
-      ? admin
-        ? posts.filter((post) => post.approved === null)
-        : posts
-      : posts.filter((post) => post.owner._id === id);
+    let postsForProps = [];
+    if (home) postsForProps = posts;
+    else if (admin) postsForProps = posts.filter((post) => post.approved === null);
+    else postsForProps = posts.filter((post) => post.owner._id === id);
     return posts ? (
       <Posts
         onApproveHandle={this.props.onApproveHandle}

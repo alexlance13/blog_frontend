@@ -31,6 +31,7 @@ class CommentsContainer extends Component {
         userId={this.props.userId}
         isAdmin={this.props.user.isAdmin}
         adminPanel={this.props.adminPanel}
+        approveCommentHandler={this.approveCommentHandler}
       />
     );
   }
