@@ -14,13 +14,13 @@ class AuthorizationContainer extends Component {
   }
 
   registerButtonHandler = async ({ login, password }) => {
-    const res = await this.props.registerUser(login, password);
-    if (!res) this.props.history.push('/');
+    await this.props.registerUser(login, password);
+    this.props.history.push('/');
   };
 
   loginButtonHandler = async ({ login, password }) => {
-    const res = await this.props.loginUser(login, password);
-    if (!res) this.props.history.push('/');
+    await this.props.loginUser(login, password);
+    this.props.history.push('/');
   };
 
   render() {
