@@ -9,18 +9,18 @@ class AuthorizationContainer extends Component {
     super(props);
     this.state = {
       login: '',
-      password: ''
+      password: '',
     };
   }
 
   registerButtonHandler = async ({ login, password }) => {
-    await this.props.registerUser(login, password);
-    setTimeout(() => this.props.history.push('/'), 2000);
+    const res = await this.props.registerUser(login, password);
+    if (!res) this.props.history.push('/');
   };
 
   loginButtonHandler = async ({ login, password }) => {
-    await this.props.loginUser(login, password);
-    setTimeout(() => this.props.history.push('/'), 2000);
+    const res = await this.props.loginUser(login, password);
+    if (!res) this.props.history.push('/');
   };
 
   render() {
@@ -32,7 +32,7 @@ class AuthorizationContainer extends Component {
       password: Yup.string()
         .min(5, 'Too Short!')
         .max(32, 'Too Long!')
-        .required('Required')
+        .required('Required'),
     });
     return (
       <Authorization
@@ -49,7 +49,7 @@ class AuthorizationContainer extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     loginUser: (login, password) => dispatch(loginUser(login, password)),
-    registerUser: (login, password) => dispatch(registerUser(login, password))
+    registerUser: (login, password) => dispatch(registerUser(login, password)),
   };
 }
 

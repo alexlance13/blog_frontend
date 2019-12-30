@@ -4,16 +4,16 @@ import Swal from 'sweetalert2';
 import setErrorText from '../../helpers/setErrorText';
 
 export function loginUser(login, password) {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const res = await axios.post('/login', {
         login,
-        password
+        password,
       });
       dispatch(setUserInfo(res.data.token, res.data.userId));
       const userInfo = {
         token: res.data.token,
-        userId: res.data.userId
+        userId: res.data.userId,
       };
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
       const response = await axios.get(`/users/${res.data.userId}`);
@@ -23,25 +23,26 @@ export function loginUser(login, password) {
         icon: 'success',
         title: 'You are successfully logged in',
         showConfirmButton: false,
-        timer: 2000
+        timer: 2000,
       });
     } catch (e) {
       setErrorText(e, 'Auth error');
+      return e;
     }
   };
 }
 
 export function registerUser(login, password) {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const res = await axios.post('/register', {
         login,
-        password
+        password,
       });
       dispatch(setUserInfo(res.data.token, res.data.userId));
       const userInfo = {
         token: res.data.token,
-        userId: res.data.userId
+        userId: res.data.userId,
       };
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
       const response = await axios.get(`/users/${res.data.userId}`);
@@ -51,10 +52,11 @@ export function registerUser(login, password) {
         icon: 'success',
         title: 'Registration complete',
         showConfirmButton: false,
-        timer: 2000
+        timer: 2000,
       });
     } catch (e) {
       setErrorText(e, 'Auth error');
+      return e;
     }
   };
 }
@@ -62,12 +64,12 @@ export function registerUser(login, password) {
 export function setUserInfo(token, userId) {
   return {
     type: SET_USER_INFO,
-    payload: { token, userId }
+    payload: { token, userId },
   };
 }
 
 export function logOut() {
-  return dispatch => {
+  return (dispatch) => {
     localStorage.setItem('userInfo', JSON.stringify({}));
     localStorage.setItem('user', JSON.stringify({}));
     dispatch(logOutAction());
@@ -76,20 +78,20 @@ export function logOut() {
       icon: 'success',
       title: 'You are successfully logged out',
       showConfirmButton: false,
-      timer: 2000
+      timer: 2000,
     });
   };
 }
 
 export function logOutAction() {
   return {
-    type: LOG_OUT
+    type: LOG_OUT,
   };
 }
 
 export function setUserAction(user) {
   return {
     type: SET_USER,
-    user
+    user,
   };
 }

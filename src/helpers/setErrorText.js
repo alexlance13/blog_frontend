@@ -10,6 +10,15 @@ export default function setErrorText(e, title) {
       case 'Invalid token':
         text = 'Your token is invalid';
         break;
+      case 'Credentials is invalid':
+        text = 'There is no user with this login and password combination';
+        break;
+      case 'Login already exist':
+        text = 'Login already exist';
+        break;
+      case 'Image too large':
+        text = 'Image too large';
+        break;
       default:
         text = 'Something went wrong';
         break;
