@@ -27,7 +27,7 @@ export function loginUser(login, password) {
       });
     } catch (e) {
       setErrorText(e, 'Auth error');
-      return e;
+      throw e;
     }
   };
 }
@@ -56,7 +56,7 @@ export function registerUser(login, password) {
       });
     } catch (e) {
       setErrorText(e, 'Auth error');
-      return e;
+      throw e;
     }
   };
 }
