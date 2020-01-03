@@ -14,7 +14,7 @@ const Menu = (props) => {
     if (windowWidth < 768) {
       setIsMenuOpen(false);
     }
-  }, [windowWidth]);
+  }, [windowWidth, isLoggedIn]);
 
   useOutsideClick(ref, () => {
     if (!isMenuOpen) return;
