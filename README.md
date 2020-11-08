@@ -15,3 +15,5 @@ CRUD with NodeJS(Express.js using MVC), MongoDB(Mongoose) and AWS storage on bac
 
 ### Backend link
 https://github.com/alexlance13/blog_backend
+### Heroku link
+https://safe-plains-32036.herokuapp.com/
